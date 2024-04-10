@@ -67,10 +67,10 @@ class DoubleLinkedList {
         }
     }
 
-  popBack() { // 맨 끝에 있는 수를 빼면서 동시에 그 수를 반환합니다.
-        if (this.tail == null) {
-            console.log("List is empty");
-        } else if (this.tail.prev == null) { // 노드가 하나 남았다면
+    popBack() {
+        if(this.tail == null) {
+              console.log("List is Empty");
+        } else if(this.tail.prev == null) {
             const temp = this.tail;
 
             this.head = null; // head값을 None으로 바꿔주고
@@ -121,7 +121,6 @@ function Solution() {
     for(let i=1;i<=N;i++) {
         // console.
         const [cmd, num] = input[i].split(" ");
-        // console.log(cmd, num, ret)
         if(cmd === 'push_back') {
             LinkedList.pushBack(num);
         } else if(cmd === 'push_front') {
