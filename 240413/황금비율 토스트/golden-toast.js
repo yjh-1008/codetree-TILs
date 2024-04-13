@@ -11,7 +11,6 @@ class Node {
         this.END = new Node(-1);
         this.head = this.END;
         this.tail = this.END;
-        this.size = 0;
       }
   
     pushFront(data) {
@@ -21,7 +20,6 @@ class Node {
         this.head.prev = newNode;
         this.head = newNode;
         newNode.prev = null;
-        this.size += 1;
     }
   
     pushBack(data) {
@@ -33,8 +31,6 @@ class Node {
             this.tail.prev.next = newNode;
             newNode.next = this.tail;
             this.tail.prev = newNode;
-  
-            this.size += 1;
         }
     }
   
@@ -52,16 +48,15 @@ class Node {
             node.next = null;
             node.prev = null;
         }
-  
-        this.size -= 1;
+
         return nextNode;
     }
   
     insert(node, newData) {
         if(node === this.end()) {
-            this.pushBack();
+            this.pushBack(newData);
         }else if(node ===this.begin()) {
-            this.pushFront();
+            this.pushFront(newData);
         }else {
             const newNode = new Node(newData);
             newNode.prev = node.prev;
@@ -82,45 +77,47 @@ class Node {
     }
   }
   
-  const fs = require("fs");
-  const input = fs.readFileSync(0).toString().trim().split("\n");
-  
-  // 변수 선언 및 입력:
-  const [n, m] = input[0].split(" ").map(Number);
-  const s = input[1];
-  const commands = input.slice(2, 2 + m);
-  
-  // 연결리스트 정의
-  const l = new DoubleLinkedList();
-  s.split("").map(c => l.pushBack(c));
-  
-  // iterator 정의
-  let it = l.end();
-  
-  commands.forEach(command => {
-      if (command.startsWith("L")) {
-          if (it !== l.begin()) { // 빵들의 맨 앞이 아니라면
-              it = it.prev; // 앞으로 이동합니다.
+  const fs = require('fs');
+  const input= fs.readFileSync(0).toString().trim().split("\n");
+  let [N, M] = input[0].split(" ").map(Number);
+  const arr = input[1].split("");
+  const Solution = () => {
+      let idx = arr.length-1;
+      const doubleList = new DoubleLinkedList();
+      arr.forEach((item) => {
+          doubleList.pushBack(item);
+      })
+      let lt = doubleList.end();
+      for(let i=2;i<input.length;i++) {
+          const [cmd, str] = input[i].split(" ");
+          switch(cmd) {
+              case 'L':
+                  if(lt != doubleList.begin()) {
+                    lt = lt.prev;
+                  }
+                  break;
+              case 'P':
+                  doubleList.insert(lt, str);
+                  break;
+              case 'R':
+                if(lt != doubleList.end()) {
+                    lt = lt.next;
+                  }
+                  break;
+              case 'D':
+                  if(lt != doubleList.end()) {
+                    lt = doubleList.erase(lt);
+                  }
+                  break;
           }
-      } else if (command.startsWith("R")) {
-          if (it !== l.end()) { // 빵들의 맨 뒤가 아니라면
-              it = it.next; // 뒤로 이동합니다.
-          }
-      } else if (command.startsWith("D")) {
-          if (it !== l.end()) { // 빵들의 맨 뒤가 아니라면
-              it = l.erase(it); // 바로 뒤에 있는 빵을 제거합니다.
-          }
-      } else {
-          const [_, c] = command.split(' ');
-          l.insert(it, c); // 가리키는 위치에 문자 c를 추가합니다.
       }
-  });
-  
-  // 출력:
-  let ans = "";
-  it = l.begin();
-  while (it !== l.end()) {
-      ans += it.data;
-      it = it.next;
+      let ans = "";
+      lt = doubleList.begin();
+      while (lt !== doubleList.end()) {
+          ans += lt.data;
+          lt = lt.next;
+      }
+      console.log(ans);
   }
-  console.log(ans);
+  
+  Solution();
