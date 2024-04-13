@@ -92,38 +92,27 @@ class Node {
       arr.forEach((item) => {
           doubleList.pushBack(item);
       })
+      let lt = doubleList.end();
       for(let i=2;i<input.length;i++) {
           const [cmd, str] = input[i].split(" ");
-          let temp = null;
           switch(cmd) {
               case 'L':
-                  if(idx <= 0) continue;
-                  idx -= 1;
+                  if(lt != doubleList.begin()) {
+                    lt = lt.prev;
+                  }
                   break;
               case 'P':
-                  temp = doubleList.head;
-                  for(let i=0;i<=idx;i++) {
-                      temp = temp.next;
-                  }
-                  idx+=1;
-                  doubleList.insert(temp, str);
+                  doubleList.insert(lt, str);
                   break;
               case 'R':
-                  if(idx > M) continue;
-                  idx += 1;
+                if(lt != doubleList.end()) {
+                    lt = lt.next;
+                  }
                   break;
               case 'D':
-                  temp = doubleList.head;
-                  if(idx == 0) doubleList.erase(temp);
-                  else if(idx === M) continue;
-                  else {
-                    for(let i=0;i<idx;i++) {
-                        temp = temp.next;
-                    }
-                    // console.log(temp);
-                    doubleList.erase(temp.next);
+                  if(lt != doubleList.end()) {
+                    doubleList.erase(lt);
                   }
-                  
                   break;
           }
       }
