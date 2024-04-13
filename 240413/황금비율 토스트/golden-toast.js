@@ -95,7 +95,6 @@ const Solution = () => {
     for(let i=2;i<input.length;i++) {
         const [cmd, str] = input[i].split(" ");
         let temp = null;
-        console.log(cmd)
         switch(cmd) {
             case 'L':
                 if(idx < 0) continue;
