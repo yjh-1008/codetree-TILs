@@ -116,13 +116,13 @@ class Node {
                   break;
           }
       }
-      let temp = doubleList.head;
-      const ret= [];
-      while(temp != doubleList.END) {
-          ret.push(temp.data)
-          temp = temp.next
+      let ans = "";
+      lt = doubleList.begin();
+      while (lt !== doubleList.end()) {
+          ans += lt.data;
+          lt = lt.next;
       }
-      console.log(ret.join(""))
+      console.log(ans);
   }
   
   Solution();
