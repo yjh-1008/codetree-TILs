@@ -8,7 +8,7 @@ const pivot_sort =(arr) => {
     return arr;
   }
 
-  const pivot = [arr[0]];
+  const pivot = arr[0];
   const left = [];
   const right = [];
 
@@ -20,7 +20,10 @@ const pivot_sort =(arr) => {
     } 
   }
 
-  return pivot_sort(left).concat(pivot, pivot_sort(right));
+  const lsort = pivot_sort(left);
+  const rsort = pivot_sort(right);
+
+  return [...lsort, pivot,...rsort ]
 }
 
 console.log(pivot_sort(nums).join(" "));
