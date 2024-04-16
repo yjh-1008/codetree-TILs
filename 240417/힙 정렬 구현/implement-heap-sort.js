@@ -39,7 +39,7 @@ function heapSort(array) {
     //부모 요소가 자식 요소와 바꾸어 졌으면 swap처리 및 heap 재검사
     if (root !== parent) {
       swap(heapArray, parent, root);
-      heap(heapArray, length, root);
+    //   heap(heapArray, length, root);
     }
   }
 
