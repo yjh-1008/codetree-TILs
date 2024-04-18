@@ -20,7 +20,6 @@ class Stack {
   }
 
   top() {
-    console.log(this.items)
       return this.items[this.items.length-1];
   }
 
