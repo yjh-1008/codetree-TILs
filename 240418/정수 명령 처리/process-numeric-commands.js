@@ -20,7 +20,7 @@ class Stack {
     }
 
     top() {
-        return this.items.at(-1);
+        return this.items[this.items.length-1];
     }
 
     join(str) {
