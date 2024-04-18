@@ -35,9 +35,9 @@ const stack = [];
 let ret = true;
 arr.forEach((item) => {
     if(item === '(') {
-        satck.push(item);
+        stack.push(item);
     } else {
-        if(stack.empty()) {
+        if(stack.length== 0) {
             ret = false;
             return;
         } else {
@@ -46,5 +46,5 @@ arr.forEach((item) => {
     }
 })
 
-if(stack.empty()) console.log(ret ? 'Yes' : 'No');
+if(stack.length == 0) console.log(ret ? 'Yes' : 'No');
 else console.log('No')
