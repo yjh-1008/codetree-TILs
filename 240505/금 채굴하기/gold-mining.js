@@ -52,12 +52,16 @@ function findCoin(y, x, cnt) {
 
 function Solution() {
     for(let i=0;i<N;i++) {
-        for(let j=0;j<M;j++) {
+        for(let j=0;j<N;j++) {
             let cnt = chkArea(i,j);
             // console.log(cnt);
             if(cnt >= 1) {
                 const coin = findCoin(i, j, cnt);
-                ret = Math.max(coin, ret);
+                const areaCost = cnt * cnt + (cnt+1) * (cnt+1);
+                if(areaCost - coin*M) {
+                    ret = Math.max(coin, ret);
+                }
+              
             }
         }
     }
