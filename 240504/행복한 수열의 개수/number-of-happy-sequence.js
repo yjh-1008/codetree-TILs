@@ -11,8 +11,8 @@ for(let i=1;i<1+y;i++) {
 
 for(let i=0;i<y;i++) {
     let chk = 1;
-    for(let j=1;j<y;j++) {
-        if(arr[i][j-1] === arr[i][j]) {
+    for(let j=0;j<y;j++) {
+        if(j > 0 &&arr[i][j-1] === arr[i][j]) {
             chk+=1;
         } 
         
@@ -27,8 +27,8 @@ for(let i=0;i<y;i++) {
 
 for(let j=0;j<y;j++) {
     let chk = 0;
-    for(let i=1;i<y;i++) {
-        if(arr[i][j] === arr[i-1][j]) {
+    for(let i=0;i<y;i++) {
+        if(i > 0 && arr[i][j] === arr[i-1][j]) {
             chk+=1;
         }
         if(chk >= x) {
