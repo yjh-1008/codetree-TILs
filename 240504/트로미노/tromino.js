@@ -37,6 +37,11 @@ for(let i=0;i<N;i++) {
             const sum = arr[i][j] + arr[i][j-1] + arr[i][j+1];
             ret = Math.max(ret, sum);
         }
+
+        if(i-1 > 0 && i+1<N) {
+            const sum = arr[i][j] + arr[i-1][j] + arr[i+1][j];
+            ret = Math.max(ret, sum);
+        }
     }
 }
 
