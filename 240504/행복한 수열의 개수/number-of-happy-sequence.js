@@ -26,7 +26,7 @@ for(let i=0;i<y;i++) {
 }
 
 for(let j=0;j<y;j++) {
-    let chk = 0;
+    let chk = 1;
     for(let i=0;i<y;i++) {
         if(i > 0 && arr[i][j] === arr[i-1][j]) {
             chk+=1;
