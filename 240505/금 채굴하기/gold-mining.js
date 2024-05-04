@@ -1,71 +1,42 @@
-const fs = require('fs');
-const input = fs.readFileSync(0).toString().trim().split("\n");
+const fs = require("fs");
+const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const [N, M] = input[0].split(" ").map(Number);
-const arr = Array.from({length:N}, ()=> new Array(M));
+// 변수 선언 및 입력
+const [n, m] = input[0].split(' ').map(Number);
+const grid = input.slice(1, n + 1).map(line => line.split(' ').map(Number));
 
-for(let i=1;i<1+N;i++) {
-    arr[i-1] = input[i].split(" ").map(Number);
+// 주어진 k에 대하여 마름모의 넓이를 반환합니다.
+function getArea(k) {
+    return k * k + (k + 1) * (k + 1);
 }
 
-const MOVE = [[1,0],[-1,0], [1,0],[-1,0]];
-let ret = 0;
-function chkArea(y, x) {
-    let cnt = 0;
-    while(true)  {
-     for(let i=0;i<4;i++) {
-        const [ny, nx] =MOVE[i];
-        let my, mx;
-        if(ny < 0) {
-           my = ny - cnt + y;
-        } else {
-          my= ny+cnt+y;
-        }
-
-        if(nx < 0) {
-            mx = nx - cnt + x;
-        } else {
-            mx = nx+cnt+y;
-        }
-        
-        // console.log(my, mx)
-        if(my < 0 || mx<0 || my>=N || mx>=M) return cnt;
-      }
-      cnt+=1;
-    }
-}
-
-function findCoin(y, x, cnt) {
-
-    let coin = 0;
-    for(let i= y-cnt+1;i<y+cnt-1;i++) {
-        for(let j=x-cnt+1; j< x+cnt-1;j++) {
-            if(arr[i][j]) coin += 1;
-        }
-    }
-    if(arr[y][x-cnt]) coin +=1;
-    if(arr[y][x+cnt]) coin += 1;
-    if(arr[y-cnt][x]) coin += 1;
-    if(arr[y+cnt][x]) coin +=1;
-    return coin;
-}
-
-function Solution() {
-    for(let i=0;i<N;i++) {
-        for(let j=0;j<N;j++) {
-            let cnt = chkArea(i,j);
-            // console.log(cnt);
-            if(cnt >= 1) {
-                const coin = findCoin(i, j, cnt);
-                const areaCost = cnt * cnt + (cnt+1) * (cnt+1);
-                if(areaCost - coin*M) {
-                    ret = Math.max(coin, ret);
-                }
-              
+// 주어진 k에 대하여 채굴 가능한 금의 개수를 반환합니다.
+function getNumOfGold(row, col, k) {
+    let numOfGold = 0;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (Math.abs(row - i) + Math.abs(col - j) <= k) {
+                numOfGold += grid[i][j];
             }
         }
     }
-    console.log(ret)
+    return numOfGold;
 }
 
-Solution();
+let maxGold = 0;
+
+// 격자의 각 위치가 마름모의 중앙일 때 채굴 가능한 금의 개수를 구합니다.
+for (let row = 0; row < n; row++) {
+    for (let col = 0; col < n; col++) {
+        for (let k = 0; k < 2 * (n - 1) + 1; k++) {
+            const numOfGold = getNumOfGold(row, col, k);
+            
+            // 손해를 보지 않으면서 채굴할 수 있는 최대 금의 개수를 저장합니다.
+            if (numOfGold * m >= getArea(k)) {
+                maxGold = Math.max(maxGold, numOfGold);
+            }
+        }
+    }
+}
+
+console.log(maxGold);
