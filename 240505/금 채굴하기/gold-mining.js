@@ -28,7 +28,7 @@ let maxGold = 0;
 // 격자의 각 위치가 마름모의 중앙일 때 채굴 가능한 금의 개수를 구합니다.
 for (let row = 0; row < n; row++) {
     for (let col = 0; col < n; col++) {
-        for (let k = 0; k < 2 * (n - 1) + 1; k++) {
+        for (let k = 0; k < 2 * (n) + 1; k++) {
             const numOfGold = getNumOfGold(row, col, k);
             
             // 손해를 보지 않으면서 채굴할 수 있는 최대 금의 개수를 저장합니다.
