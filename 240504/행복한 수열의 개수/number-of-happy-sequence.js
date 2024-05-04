@@ -12,30 +12,36 @@ for(let i=1;i<1+y;i++) {
 for(let i=0;i<y;i++) {
     let chk = 1;
     for(let j=0;j<y;j++) {
-        if(j > 0 &&arr[i][j-1] === arr[i][j]) {
-            chk+=1;
+        if(j > 0) {
+            if(arr[i][j-1] === arr[i][j]) {
+                chk+=1;
+            } else {
+                chk = 1;
+            }
+         
         } 
         
-         if(chk >= x) {
+        if(chk >= x) {
             ret+=1;
             break;
-        } else {
-            chk = 1;
-        }
+        } 
     }
 }
 
 for(let j=0;j<y;j++) {
     let chk = 1;
     for(let i=0;i<y;i++) {
-        if(i > 0 && arr[i][j] === arr[i-1][j]) {
-            chk+=1;
+        if(i > 0) {
+            if(arr[i][j] === arr[i-1][j]) {
+                chk+=1;
+            } else {
+                chk = 1;
+            }
+            
         }
         if(chk >= x) {
             ret+=1;
             break;
-        } else {
-            chk = 1;
         }
     }
 }
