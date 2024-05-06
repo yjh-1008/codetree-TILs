@@ -11,13 +11,13 @@ function isNNumber(i, j, q, w) {
     // console.log(i, j, q, w)
     for(let y=i;y<=q;y++) {
         for(let x=j;x<=w;x++) {
-            if(arr[y][x] <= 0) return 0;
+            if(arr[y][x] <= 0) return -1;
             cnt+=1;
         }
     }
     return cnt;
 }
-let ret = 0;
+let ret = -1;
 function Solution() {
     for(let i=0;i<n;i++) {
         for(let j=0;j<m;j++) {
