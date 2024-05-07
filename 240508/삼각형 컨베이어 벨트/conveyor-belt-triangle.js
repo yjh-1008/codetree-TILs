@@ -4,7 +4,7 @@ const input = fs.readFileSync(0).toString().trim().split("\n");
 let [n, t] = input[0].split(" ").map(Number);
 const arr = [];
 for(let i=1;i<=3;i++) {
-    arr[i-1] = input[i].split(" ").map(Number);
+    arr[i-1] = input[i].trim().split(" ").map(Number);
 }
 
 function Solution() {
@@ -21,7 +21,6 @@ function Solution() {
                 arr[i].unshift(tmp);
                 tmp = arr[i].pop();
             } else if(i===2){
-             
                 //i가 n-1이라면 arr[i].unshift(tmp) arr[0].unsfhit(arr[i].pop())
                 arr[i].unshift(tmp);
                 // console.log(arr[i], i);
