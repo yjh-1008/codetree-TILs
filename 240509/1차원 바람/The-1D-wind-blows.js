@@ -4,7 +4,7 @@ const input = fs.readFileSync(0).toString().trim().split("\n");
 const [n, m, q] = input[0].split(" ").map(Number);
 const arr = [];
 for(let i=1;i<=n;i++) {
-    arr[i-1] = input[i].split(" ").map(Number)
+    arr[i-1] = input[i].trim().split(" ").map(Number)
 }
 const cmds = [];
 for(let i=1+n;i<1+n+q;i++) {
