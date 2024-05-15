@@ -16,7 +16,7 @@ function zipStr(str) {
     })
     newStr.push(cnt);
     // console.log(str, newStr);
-    return newStr.length;
+    return newStr.join("").length;
 }
 
 function Solution() {
