@@ -8,7 +8,7 @@ for(let i=1;i<=N;i++) {
 arr = arr.reverse()
 function Solution() {
     for(let i=N+1;i<input.length;i++) {
-        const [s,e] = input[i].trim().split(" ").map(Number);
+        const [s,e] = input[i].trim().split(" ").map((v) => v-1);
         let tmp = [];
         arr.forEach((item,idx) => {
             if(idx < s || idx > e) {
