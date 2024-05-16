@@ -23,12 +23,12 @@ function Solution() {
     MOVES.forEach((item) => {
         const [my, mx] = item;
         for(let i=1;i<=area-1;i++) {
-            const ny = my+y, nx = mx+x;
+            const ny = (my*i)+y, nx = (i*mx)+x;
             if(!isArea(ny, nx)) break;
             arr[ny][nx] = 0;
         }
     })
-
+    // console.log(arr);
     for(let j=0;j<N;j++) {
         let tmp = [];
         for(let i=0;i<N;i++) {
