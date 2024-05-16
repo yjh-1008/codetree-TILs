@@ -5,7 +5,7 @@ let arr = []
 for(let i=1;i<=N;i++) {
     arr[i-1] = Number(input[i]);
 }
-arr = arr.reverse()
+// arr = arr.reverse()
 function Solution() {
     for(let i=N+1;i<input.length;i++) {
         const [s,e] = input[i].trim().split(" ").map((v) => v-1);
@@ -20,7 +20,7 @@ function Solution() {
 
     let ret = ''
     ret += arr.length+'\n';
-    arr.reverse().forEach((item) => ret += item+'\n');
+    arr.forEach((item) => ret += item+'\n');
     console.log(ret)
 }
 
