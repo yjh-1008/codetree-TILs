@@ -32,16 +32,21 @@ function Solution() {
                     break;
                 }
             }
-            // arr.splice()
-            // console.log(arr[i], cnt);
+            // console.log(i, cnt);
+            //cnt가 M보다 작으면 값을 넣는다 cnt만큼 값을 추가하고 i를 증가시킨다.
             if(cnt < M) {
-                for(let j=0;j<cnt;j++) {
+                for(let k=0;k<cnt;k++) {
                     tmp.push(arr[i]);
                 }
-            } else i+= cnt-1;
 
+                i+=cnt-1;
+            } else {
+                i+=cnt-1;
+            }
+            //cnt가 크거나 같으면 추가하지 않고 i를 증가시킨다
+           
         }
-        // console.log(tmp)
+ 
         arr = tmp;
     }
     console.log(`${arr.length}\n${arr.join("\n")}`);
