@@ -23,7 +23,7 @@ function Solution() {
     while(exist()) {
         let tmp = [];
         let cnt = 0;
-        for(let i=1;i<arr.length;i++) {
+        for(let i=0;i<arr.length;i++) {
             if(tmp.at(-1) === arr[i]) {
                 tmp.push(arr[i]);
                 cnt += 1;
@@ -32,6 +32,7 @@ function Solution() {
                 tmp.push(arr[i]);
                 cnt = 1;
             }
+            // console.log(tmp)
             if(cnt == M) {
                 for(let j=0;j<M;j++) {
                     tmp.pop();
@@ -40,9 +41,9 @@ function Solution() {
             }
         }
         arr = tmp;
-        console.log(`${arr.length}\n${arr.join("\n")}`);
+       
     }
-    
+     console.log(`${arr.length}\n${arr.join("\n")}`);
 }
 
 Solution();
