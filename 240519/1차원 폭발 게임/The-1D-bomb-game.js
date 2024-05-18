@@ -21,8 +21,8 @@ function exist() {
 
 function Solution() {
     while(exist()) {
-        let tmp = [arr[0]];
-        let cnt = 1;
+        let tmp = [];
+        let cnt = 0;
         for(let i=1;i<arr.length;i++) {
             if(tmp.at(-1) === arr[i]) {
                 tmp.push(arr[i]);
