@@ -16,11 +16,11 @@ function exist() {
             cnt= 1;
         }
     }
-    return false;
+    return cnt === M;
 }
 
 function Solution() {
-    while(exist()) {
+    while(arr.length && exist()) {
         let tmp = [];
         let cnt = 0;
         for(let i=0;i<arr.length;i++) {
@@ -29,20 +29,23 @@ function Solution() {
                 cnt += 1;
                 
             }else {
+                // console.log('here');
                 tmp.push(arr[i]);
                 cnt = 1;
             }
             // console.log(tmp)
             if(cnt == M) {
+                // console.log('here')
                 for(let j=0;j<M;j++) {
                     tmp.pop();
                 }
                 cnt = 0;
             }
         }
+        // console.log(arr, tmp);
         arr = tmp;
-       
     }
+    // console.log(arr);
      console.log(`${arr.length}\n${arr.join("\n")}`);
 }
 
