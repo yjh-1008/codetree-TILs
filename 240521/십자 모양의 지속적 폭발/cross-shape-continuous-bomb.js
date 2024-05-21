@@ -28,14 +28,14 @@ function bomb(y, x) {
 function redraw() {
     const newArr = Array.from({length:N}, () => new Array(N).fill(0));
     for(let i=0;i<N;i++) {
-        let newIdx = 3;
+        let newIdx = N-1;
         for(let j=N-1;j>=0;j--) {
+        // console.log(j, i, newIdx);
           if(arr[j][i] > 0) {
             newArr[newIdx--][i] = arr[j][i];
           }
         }
     }
-    // console.log('new',newArr);
     for(let i=0;i<N;i++) {
         for(let j=0;j<N;j++) {
             arr[i][j] = newArr[i][j]
