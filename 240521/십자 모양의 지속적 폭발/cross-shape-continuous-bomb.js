@@ -29,7 +29,7 @@ function redraw() {
     const newArr = Array.from({length:N}, () => new Array(N).fill(0));
     for(let i=0;i<N;i++) {
         let newIdx = 3;
-        for(let j=3;j>=0;j--) {
+        for(let j=N-1;j>=0;j--) {
           if(arr[j][i] > 0) {
             newArr[newIdx--][i] = arr[j][i];
           }
