@@ -66,7 +66,7 @@ function rotate() {
 }
 
 function Solution() {
-    while(K>=0) {
+    while(K>0) {
         
      for(let i=0;i<N;i++) {
         let idx = 0, cnt = 0, val=0;
@@ -98,7 +98,7 @@ function Solution() {
 
     rotate();
      //회전시킨다.
-         moveDown();
+    moveDown();
       K--;
 
     }
