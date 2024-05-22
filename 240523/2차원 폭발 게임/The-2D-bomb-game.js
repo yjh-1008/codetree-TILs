@@ -66,32 +66,38 @@ function rotate() {
 }
 
 function Solution() {
-    while(K>0) {
+    while(K>=0) {
         
-     for(let i=0;i<N;i++) {
-        let idx = 0, cnt = 0, val=0;
-        for(let j=0;j<N;j++) {
-            //arr[i][j]가 0이 아니라면 폭탄을 터트린다.
-            if(arr[j][i]) {
-                if(val === arr[j][i]) {
-                    cnt+= 1;
-                } else {
-                    if(cnt >= M) {
-                        for(let k=idx;k<j;k++) {
-                            arr[k][i] = 0;
-                        }
-                    }
-                    cnt = 1;
-                    val = arr[j][i];
-                    idx = j;
-                }
-            }
+     while(true){
+        let chk = false;
+        for(let i=0;i<N;i++) {
+           let idx = 0, cnt = 0, val=0;
+           for(let j=0;j<N;j++) {
+               //arr[i][j]가 0이 아니라면 폭탄을 터트린다.
+               if(arr[j][i]) {
+                   if(val === arr[j][i]) {
+                       cnt+= 1;
+                   } else {
+                       if(cnt >= M) {
+                            chk = true;
+                           for(let k=idx;k<j;k++) {
+                               arr[k][i] = 0;
+                           }
+                       }
+                       cnt = 1;
+                       val = arr[j][i];
+                       idx = j;
+                   }
+               }
+           }
+           if(cnt >= M) {
+                chk = true;
+               for(let k=idx;k<N;k++) {
+                   arr[k][i] = 0;
+               }
+           }
         }
-        if(cnt >= M) {
-            for(let k=idx;k<N;k++) {
-                arr[k][i] = 0;
-            }
-        }
+        if(!chk) break;
      }
 
     moveDown();
@@ -100,7 +106,7 @@ function Solution() {
      //회전시킨다.
     moveDown();
       K--;
-
+    // console.log(arr);
     }
     let cnt = 0;
     for(let i=0;i<N;i++) {
