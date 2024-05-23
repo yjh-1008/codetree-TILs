@@ -63,9 +63,12 @@ function bomb(r, c) {
                 cnt += 1;
             } else {
                 if(cnt >= 2) cntNum+= 1;
-                n = arr[i][j];
-                idx=j;
-                cnt = 1;
+                if(newGrid[i][j] === 0) n= -1;
+                else {
+                    n = arr[i][j];
+                    idx=j;
+                    cnt = 1;
+                }
             }
         }
         if(cnt >=2) cntNum+=1;
@@ -78,15 +81,16 @@ function bomb(r, c) {
                 cnt += 1;
             } else {
                 if(cnt >= 2) cntNum+= 1;
-                n = arr[j][i];
-                idx=j;
-                cnt = 1;
+                if(newGrid[j][i] === 0) n = -1;
+                else {
+                    n = arr[j][i];
+                    idx=j;
+                    cnt = 1;
+                }
             }
         }
         if(cnt >=2) cntNum+=1;
     }
-
-    // if(r==2 && c==1) console.log(visited);
     ret = Math.max(cntNum, ret);
 }
 
