@@ -59,31 +59,11 @@ function bomb(r, c) {
     for(let i=0;i<N;i++) {
         let idx = N-1;
         for(let j=N-1;j>=0;j--) {
-            if(newGrid[j][i] > NONE) {
+            if(newGrid[j][i]) {
                 newGrid2[idx--][i] = newGrid[j][i];
             }
         }
     }
-    //dfs를 진행해서 카운팅 해야함.
-        //중력이 작동해야함
-    // let cntNum = 0;
-    // for(let i=0;i<N;i++) {
-    //     let n =-1, idx2=0, cnt = 0;
-    //     for(let j=0;j<N;j++) {
-    //         if(newGrid2[i][j] === 0) continue;
-    //         if(n === newGrid2[i][j]) {
-    //             cnt += 1;
-    //         } else {
-    //             if(cnt >= 2) cntNum+= 1;
-    //             else {
-    //                 n = newGrid2[i][j];
-    //                 idx2=j;
-    //                 cnt = 1;
-    //             }
-    //         }
-    //     }
-    //     if(cnt >=2) cntNum+=1;
-    // }
     ret = Math.max(calc(newGrid2), ret);
 }
 
