@@ -52,21 +52,20 @@ function bomb(r, c) {
             }
         }
     }
-   const visited = Array.from({length:N} ,() => new Array(N).fill(false));
     //dfs를 진행해서 카운팅 해야함.
         //중력이 작동해야함
     let cntNum = 0;
     for(let i=0;i<N;i++) {
-        let n =-1, idx=0, cnt = 0;
+        let n =-1, idx2=0, cnt = 0;
         for(let j=0;j<N;j++) {
-            if(n === newGrid[i][j]) {
+            if(newGrid2[i][j] === 0) continue;
+            if(n === newGrid2[i][j]) {
                 cnt += 1;
             } else {
                 if(cnt >= 2) cntNum+= 1;
-                if(newGrid[i][j] === 0) n= -1;
                 else {
-                    n = arr[i][j];
-                    idx=j;
+                    n = newGrid2[i][j];
+                    idx2=j;
                     cnt = 1;
                 }
             }
@@ -75,16 +74,16 @@ function bomb(r, c) {
     }
 
     for(let i=0;i<N;i++) {
-        let n =-1, idx=0, cnt = 0;
+        let n =-1, idx2=0, cnt = 0;
         for(let j=0;j<N;j++) {
-            if(n === newGrid[j][i]) {
+             if(newGrid2[j][i] === 0) continue;
+            if(n === newGrid2[j][i]) {
                 cnt += 1;
             } else {
                 if(cnt >= 2) cntNum+= 1;
-                if(newGrid[j][i] === 0) n = -1;
                 else {
-                    n = arr[j][i];
-                    idx=j;
+                    n = newGrid2[j][i];
+                    idx2=j;
                     cnt = 1;
                 }
             }
