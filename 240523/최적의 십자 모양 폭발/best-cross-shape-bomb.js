@@ -34,7 +34,10 @@ function calc(newGrid2) {
     // 중복되어 2번씩 count되므로 2로 나누어줍니다.
     return cnt / 2;
 }
-
+function inBombRange(x, y, centerX, centerY, bombRange) {
+    return (x === centerX || y === centerY) && 
+           Math.abs(x - centerX) + Math.abs(y - centerY) < bombRange;
+}
 let ret = -1;
 function bomb(r, c) {
     const range = arr[r][c] -1;
@@ -45,13 +48,12 @@ function bomb(r, c) {
             newGrid[i][j] = arr[i][j];
         }
     }
-     newGrid[r][c] = NONE;
-    for(let i=0;i<4;i++) {
-        const [ny, nx] = MOVES[i];
-        for(let j=0;j<range;j++) {
-            const my = ny+r , mx = nx+c;
-             if(!isRange(my, mx)) continue;
-            newGrid[my][mx] = NONE;
+     const bombRange = arr[r][c];
+    for (let i = 0; i <N; i++) {
+        for (let j = 0; j < N; j++) {
+            if (inBombRange(i, j, r, c, bombRange)) {
+                newGrid[i][j] = 0;
+            }
         }
     }
     const newGrid2 = Array.from({length:N} ,() => new Array(N).fill(0));
