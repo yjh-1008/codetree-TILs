@@ -11,17 +11,30 @@ function isRange(r, c) {
 }
 const NONE = 0;
 
-// function dfs(r, c, visited, newGrid2) {
-//     visited[r][c] = true;
-//     let cnt = 1;
-//     for(let i=0;i<4;i++) {
-//         const [ny, nx] = MOVES[i];
-//         const my = ny+r , mx = nx+c;
-//         if(!isRange(my, mx) || visited[my][mx]) continue;
-//         if(newGrid2[r][c] === newGrid2[my][mx]) cnt += dfs(my, mx, visited, newGrid2);
-//     }
-//     return cnt;
-// }
+function meetTheCondition(x, y, nx, ny, newGrid2) {
+    return isRange(x, y) && isRange(nx, ny) && newGrid2[x][y] && newGrid2[x][y] === newGrid2[nx][ny];
+}
+
+function calc(newGrid2) {
+    let cnt = 0;
+    for (let x = 0; x < N; x++) {
+        for (let y = 0; y < N; y++) {
+            const dxs = [-1, 1, 0, 0], dys = [0, 0, 1, -1];
+            
+            dxs.forEach((dx, index) => {
+                const dy = dys[index];
+                const nx = x + dx, ny = y + dy;
+                if (meetTheCondition(x, y, nx, ny, newGrid2)) {
+                    cnt += 1;
+                }
+            });
+        }
+    }
+    
+    // 중복되어 2번씩 count되므로 2로 나누어줍니다.
+    return cnt / 2;
+}
+
 let ret = -1;
 function bomb(r, c) {
     const range = arr[r][c] -1;
@@ -72,25 +85,7 @@ function bomb(r, c) {
         }
         if(cnt >=2) cntNum+=1;
     }
-
-    for(let i=0;i<N;i++) {
-        let n =-1, idx2=0, cnt = 0;
-        for(let j=0;j<N;j++) {
-             if(newGrid2[j][i] === 0) continue;
-            if(n === newGrid2[j][i]) {
-                cnt += 1;
-            } else {
-                if(cnt >= 2) cntNum+= 1;
-                else {
-                    n = newGrid2[j][i];
-                    idx2=j;
-                    cnt = 1;
-                }
-            }
-        }
-        if(cnt >=2) cntNum+=1;
-    }
-    ret = Math.max(cntNum, ret);
+    ret = Math.max(calc(newGrid2), ret);
 }
 
 function Solution() {
