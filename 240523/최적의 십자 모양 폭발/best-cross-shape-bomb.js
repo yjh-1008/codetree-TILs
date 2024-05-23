@@ -49,7 +49,7 @@ function bomb(r, c) {
     for(let i=0;i<4;i++) {
         const [ny, nx] = MOVES[i];
         for(let j=0;j<=range;j++) {
-            const my = ny+r , mx = nx+c;
+            const my = (ny*j)+r , mx = (nx*j)+c;
              if(!isRange(my, mx)) continue;
             newGrid[my][mx] = NONE;
         }
