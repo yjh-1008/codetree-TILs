@@ -131,4 +131,3 @@ public class Main {
         System.out.println(ans);
     }
 }
-출처: https://hei-jayden.tistory.com/353?category=528820 [알음알음 성장로그:티스토리]
