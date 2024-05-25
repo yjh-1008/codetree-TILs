@@ -16,8 +16,9 @@ function Solution() {
             }
         }
         if(chk) idx = i;
+        else break;
     }
-
+    // console.log(idx);
     if(idx > -1) {
         for(let j=k;j<k+m;j++) {
         //모두 비어져 있어야 함.
