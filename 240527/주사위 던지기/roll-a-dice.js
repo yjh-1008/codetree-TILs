@@ -16,7 +16,8 @@ function getReverseNumber(n) {
 }
 function Solution() {
     r -= 1, c-=1;
-    let ret = 0;
+    let ret = 6;
+    arr[r][c]= 6;
     cmds.forEach((dir) => {
         const n = Move_obj[dir];
         const my = r+dy[n], mx = c+dx[n]; 
@@ -44,9 +45,9 @@ function Solution() {
                 ret -= arr[my][mx];       
             }
             arr[my][mx] = re
+      
             ret += re;
         }
-        // console.log(my, mx);
         r = my, c = mx;
     })
 
