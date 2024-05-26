@@ -22,12 +22,6 @@ function Solution() {
         const n = Move_obj[dir];
         const my = r+dy[n], mx = c+dx[n]; 
         if(isRange(my, mx)) {
-            let re = getReverseNumber(dice[0]);
-            if(arr[r][c] > 0) {
-                ret -= arr[r][c]       
-            }
-            arr[r][c] = re
-            ret += re;
             const num = getReverseNumber(dice[0]);
             if(dir === 'L') {
                 dice[0] = dice.pop();
@@ -46,13 +40,18 @@ function Solution() {
                 dice[0] = dice[1];
                 dice[1] = getReverseNumber(tmp);
             }
-
+            let re = getReverseNumber(dice[0]);
+            arr[r][c] = re
             r = my, c = mx;
         }
 
     })
 
-    // console.log(arr);
+    for(let i=0;i<n;i++) {
+        for(let j=0;j<n;j++) {
+            if(arr[i][j] > 0) ret += arr[i][j]
+        }
+    }
     console.log(ret)
 }
 const dy = [0,1,0,-1];
