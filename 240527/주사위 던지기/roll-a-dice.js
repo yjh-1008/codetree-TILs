@@ -16,12 +16,18 @@ function getReverseNumber(n) {
 }
 function Solution() {
     r -= 1, c-=1;
-    let ret = 6;
-    arr[r][c]= 6;
+    let ret = 0;
+    // arr[r][c]= 6;
     cmds.forEach((dir) => {
         const n = Move_obj[dir];
         const my = r+dy[n], mx = c+dx[n]; 
         if(isRange(my, mx)) {
+            let re = getReverseNumber(dice[0]);
+            if(arr[r][c] > 0) {
+                ret -= arr[r][c]       
+            }
+            arr[r][c] = re
+            ret += re;
             const num = getReverseNumber(dice[0]);
             if(dir === 'L') {
                 dice[0] = dice.pop();
@@ -40,15 +46,10 @@ function Solution() {
                 dice[0] = dice[1];
                 dice[1] = getReverseNumber(tmp);
             }
-            let re = getReverseNumber(dice[0]);
-            if(arr[my][mx] > 0) {
-                ret -= arr[my][mx];       
-            }
-            arr[my][mx] = re
-      
-            ret += re;
+
+            r = my, c = mx;
         }
-        r = my, c = mx;
+
     })
 
     // console.log(arr);
