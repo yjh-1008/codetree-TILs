@@ -4,7 +4,7 @@ let [n,m,r,c] = input[0].trim().split(" ").map(Number);
 const cmds = input[1].trim().split(" ");
 const arr = Array.from({length:n}, () => new Array(n).fill(0))
 function isRange(r, c) {
-    if(r < 0 || r>=n || c< 0 || c>=m) return false;
+    if(r < 0 || r>=n || c< 0 || c>=n) return false;
     return true;
 }
 
@@ -18,10 +18,12 @@ function Solution() {
     r -= 1, c-=1;
     let ret = 0;
     arr[r][c]= 6;
+    // console.log(cmds.length)
     cmds.forEach((dir) => {
         const n = Move_obj[dir];
         let before = getReverseNumber(dice[0]);
         const my = r+dy[n], mx = c+dx[n]; 
+        // console.log(my, mx);
         if(isRange(my, mx)) {
             const num = getReverseNumber(dice[0]);
             if(dir === 'L') {
@@ -41,6 +43,7 @@ function Solution() {
                 dice[0] = dice[1];
                 dice[1] = getReverseNumber(tmp);
             }
+            // console.log(dice);
             let re = getReverseNumber(dice[0]);
             arr[my][mx] = re
             r = my, c = mx;
