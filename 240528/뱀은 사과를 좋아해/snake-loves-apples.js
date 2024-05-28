@@ -28,8 +28,9 @@ function Solution() {
             ret += 1;
             const head = snake[0];
             const ny = my+head[0], nx = mx+head[1];
+
             const index = snake.findIndex((item)=> item[0] === ny && item[1]===nx);
-            if(!isRange(ny, nx) || index > -1) {
+            if(!isRange(ny, nx) ||  (index > -1 && index<snake.length-1)) {
                 // console.log(t)
                 return ret;
             }
