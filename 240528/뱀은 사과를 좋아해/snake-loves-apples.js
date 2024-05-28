@@ -19,7 +19,7 @@ function Solution() {
 
     const cmds = input.slice(1+M, input.length).map((item) => item.split(" "));
     let snake = [[0,0]];
-    let ret = 0;
+    let ret = 1;
     for(let t = 0;t<cmds.length;t++) {
         const [dir, count] = cmds[t]
         const idx = MOVE_OBJ[dir];
@@ -28,7 +28,10 @@ function Solution() {
             const head = snake[0];
             const ny = my+head[0], nx = mx+head[1];
             // console.log(snake)
-            if(!isRange(ny, nx) || snake.includes([ny, nx])) return ret;
+            if(!isRange(ny, nx) || snake.includes([ny, nx])) {
+                // console.log(t)
+                return ret;
+            }
             //사과가 있다면 길이를 1늘림
             if(arr[ny][nx] === 1) {
                 snake = [[ny,nx], ...snake];
