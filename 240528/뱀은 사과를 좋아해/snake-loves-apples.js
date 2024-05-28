@@ -19,16 +19,17 @@ function Solution() {
 
     const cmds = input.slice(1+M, input.length).map((item) => item.split(" "));
     let snake = [[0,0]];
-    let ret = 1;
+    let ret = 0;
     for(let t = 0;t<cmds.length;t++) {
         const [dir, count] = cmds[t]
         const idx = MOVE_OBJ[dir];
         const my = dy[idx], mx = dx[idx];
         for(let i=0;i<count;i++) {
+            ret += 1;
             const head = snake[0];
             const ny = my+head[0], nx = mx+head[1];
-            // console.log(snake)
-            if(!isRange(ny, nx) || snake.includes([ny, nx])) {
+            const index = snake.findIndex((item)=> item[0] === ny && item[1]===nx);
+            if(!isRange(ny, nx) || index > -1) {
                 // console.log(t)
                 return ret;
             }
@@ -43,9 +44,9 @@ function Solution() {
                 snake.pop();
                 snake = [[ny,nx], ...snake];
             }
-            ret += 1;
         }
     }
+    // console.log('here')
     return ret;
 }
 
