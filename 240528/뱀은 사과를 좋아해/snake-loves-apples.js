@@ -27,7 +27,7 @@ function Solution() {
         for(let i=0;i<count;i++) {
             const head = snake[0];
             const ny = my+head[0], nx = mx+head[1];
-            console.log(snake)
+            // console.log(snake)
             if(!isRange(ny, nx) || snake.includes([ny, nx])) return ret;
             //사과가 있다면 길이를 1늘림
             if(arr[ny][nx] === 1) {
