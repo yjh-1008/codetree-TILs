@@ -21,11 +21,10 @@ function go(r, c, idx) {
         r+=dy[idx], c+=dx[idx];
         time+=1;
    
-        if(time >= 42000000) {
-            return;
-        }
+        // if(time >= 42000000) {
+        //     return;
+        // }
         if(!isRagne(r, c)) {
-            time+=1;
             ret = Math.max(time, ret);
             return;
         }
@@ -54,19 +53,19 @@ function Solution() {
 //4방면으로 진행해야한다.
     for(let i=0;i<N;i++) {
         
-        go(0, i, 0);
+        go(-1, i, 0);
     }
 
     for(let i=0;i<N;i++) {
-        go(i, N-1, 1);
+        go(i, N, 1);
     }
 
     for(let i=0;i<N;i++) {
-        go(N-1, i, 2)
+        go(N, i, 2)
     }
 
     for(let i=0;i<N;i++) {
-        go(i, 0, 3);
+        go(i, -1, 3);
     }
     // go(4, 0, 3)
     console.log(ret)
