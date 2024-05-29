@@ -17,10 +17,7 @@ function go(r, c, idx) {
     const visited = Array.from({length:N}, () => new Array(N).fill(false));
     // console.log(arr[0][4])
     while(true) {
-        if(visited[r][c]) {
-            return;
-        }
-        visited[r][c] = true;
+
         r+=dy[idx], c+=dx[idx];
         time+=1;
    
@@ -30,6 +27,10 @@ function go(r, c, idx) {
             ret = Math.max(time, ret);
             return;
         }
+         if(visited[r][c]) {
+            return;
+        }
+        visited[r][c] = true;
         if(arr[r][c] === 1) {
             if(idx === 0) idx =1;
             else if(idx ===1) idx = 0;
