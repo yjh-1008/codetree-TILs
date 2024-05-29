@@ -21,15 +21,15 @@ function go(r, c, idx) {
         r+=dy[idx], c+=dx[idx];
         time+=1;
    
-
+        if(time >= N*N) {
+            return;
+        }
         if(!isRagne(r, c)) {
             time+=1;
             ret = Math.max(time, ret);
             return;
         }
-         if(visited[r][c]) {
-            return;
-        }
+
         visited[r][c] = true;
         if(arr[r][c] === 1) {
             if(idx === 0) idx =1;
