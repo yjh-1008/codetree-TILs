@@ -2,6 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split("\n")
 const N = Number(input[0]);
 const arr = input.slice(1, input.length).map((item) => item.trim().split(" ").map(Number))
+
 const dx = [0,-1,0,1];
 const dy = [1,0,-1,0];
 let ret = 0;
@@ -13,11 +14,17 @@ function isRagne(r, c) {
 // 3 -> 4 4-> 3
 function go(r, c, idx) {
     let time= 0;
+    const visited = Array.from({length:N}, () => new Array(N).fill(false));
     // console.log(arr[0][4])
     while(true) {
-        
+        if(visited[r][c]) {
+            return;
+        }
+        visited[r][c] = true;
         r+=dy[idx], c+=dx[idx];
         time+=1;
+   
+
         if(!isRagne(r, c)) {
             time+=1;
             ret = Math.max(time, ret);
@@ -45,6 +52,7 @@ function go(r, c, idx) {
 function Solution() {
 //4방면으로 진행해야한다.
     for(let i=0;i<N;i++) {
+        
         go(0, i, 0);
     }
 
