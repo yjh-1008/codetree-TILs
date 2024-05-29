@@ -21,7 +21,7 @@ function go(r, c, idx) {
         r+=dy[idx], c+=dx[idx];
         time+=1;
    
-        if(time >= 10000000) {
+        if(time >= 90000000) {
             return;
         }
         if(!isRagne(r, c)) {
