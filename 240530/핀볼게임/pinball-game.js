@@ -30,7 +30,7 @@ function go(r, c, idx) {
             return;
         }
 
-        visited[r][c] = true;
+        // visited[r][c] = true;
         if(arr[r][c] === 1) {
             if(idx === 0) idx =1;
             else if(idx ===1) idx = 0;
