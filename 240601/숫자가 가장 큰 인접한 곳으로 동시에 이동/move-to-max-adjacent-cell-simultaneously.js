@@ -17,13 +17,11 @@ function isRange(r, c) {
 }
  
 function getMaxArea(r, c) {
-    let value=0, nr=r, nc=c;
+    let value=arr[r][c], nr=r, nc=c;
     for(let i=0;i<4;i++) {
         const ny = dy[i]+r, nx = dx[i]+c;
         if(!isRange(ny, nx)) continue;
-        // console.log(value, arr[r][c])
         if(value < arr[ny][nx]) {
-
             value = arr[ny][nx];
             nr = ny, nc = nx
         }
