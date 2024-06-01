@@ -21,18 +21,21 @@ function getMaxArea(r, c) {
     for(let i=0;i<4;i++) {
         const ny = dy[i]+r, nx = dx[i]+c;
         if(!isRange(ny, nx)) continue;
-        if(value < arr[r][c]) {
-            value = arr[r][c];
+        // console.log(value, arr[r][c])
+        if(value < arr[ny][nx]) {
+
+            value = arr[ny][nx];
             nr = ny, nc = nx
         }
     }
-
     return [nr, nc];
 }
 
 function Solution() {
+    // console.log(arr);
     for(let q=0;q<t;q++) {
         const nextGrid = Array.from({length:n}, () => new Array(n).fill(0))
+      
         for(let i=0;i<n;i++) {
             for(let j=0;j<n;j++) {
                 if(marbles[i][j]) {
@@ -42,7 +45,6 @@ function Solution() {
                 }
             }
         }
-
 
         for(let i=0;i<n;i++) {
             for(let j=0;j<n;j++) {
