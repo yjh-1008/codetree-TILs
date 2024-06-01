@@ -39,7 +39,7 @@ function Solution() {
                 if(marbles[i][j]) {
                     const [nr, nc] = getMaxArea(i, j);
                     if(nextGrid[nr][nc] === 0) nextGrid[nr][nc] = 1;
-                    else if(nextGrid[nr][nc] ===1) nextGrid[nr][nc] = 0;
+                    // else if(nextGrid[nr][nc] ===1) nextGrid[nr][nc] = 0;
                 }
             }
         }
