@@ -39,7 +39,12 @@ function move(arr,cnt) {
                     let ny = i+dy[idx], nx = j+dx[idx];
                     if(!isRange(ny, nx)) {
                         idx = changeIdx(idx);
-                        nextGrid[i][j] = idx;
+                        if(nextGrid[i][j] > -1) {
+                            cnt -=2;
+                            nextGrid[i][j] = -1;
+                        }else {
+                            nextGrid[i][j] = idx;
+                        }
                         continue;
                         // ny = i+dy[idx], nx = j+dx[idx];
                     }
@@ -61,9 +66,10 @@ function move(arr,cnt) {
         }
 
     }
+    // let ret = 0
     //  for(let i=0;i<N;i++) {
     //     for(let j=0;j<N;j++) {
-    //         arr[i][j] = nextGrid[i][j];
+    //        if(arr[i][j] > -1) ret+=1;
     //     }
     // }
     return cnt;
