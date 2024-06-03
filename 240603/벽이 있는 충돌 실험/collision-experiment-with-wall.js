@@ -25,12 +25,12 @@ function changeIdx(idx) {
     else return 2;
 }
 
-function move(arr,cnt, clearArr) {
+function move(arr,cnt) {
     let time = 0;
     while(true) {
         if(cnt === 1 || time === N *N) break;
         time += 1;
-        const nextGrid = clearArr;
+        const nextGrid = Array.from({length:N},( )=> new Array(N).fill(-1));
         // console.log(arr)
         for(let i=0;i<N;i++) {
             for(let j=0;j<N;j++) {
@@ -79,7 +79,7 @@ function Solution() {
             cnt+=1;
         }
 
-        ret += move(arr,cnt, clearArr) + '\n';
+        ret += move(arr,cnt) + '\n';
         T--;
     }
     console.log(ret)
