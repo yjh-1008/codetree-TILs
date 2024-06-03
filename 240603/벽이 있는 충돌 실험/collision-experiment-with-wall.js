@@ -27,7 +27,7 @@ function changeIdx(idx) {
 function move(arr,cnt) {
     let time = 0;
     while(true) {
-        if(cnt === 1 || time === N *N) break;
+        if(cnt === 1 || time === N *2) break;
         time += 1;
         const nextGrid = Array.from({length:N},( )=> new Array(N).fill(-1));
         // console.log(arr)
@@ -66,12 +66,6 @@ function move(arr,cnt) {
         }
 
     }
-    // let ret = 0
-    //  for(let i=0;i<N;i++) {
-    //     for(let j=0;j<N;j++) {
-    //        if(arr[i][j] > -1) ret+=1;
-    //     }
-    // }
     return cnt;
 }
 
