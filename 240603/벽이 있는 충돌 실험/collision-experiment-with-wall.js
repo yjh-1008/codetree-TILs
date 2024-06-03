@@ -87,7 +87,6 @@ function Solution() {
             const [y,x,d] = input[fsIdx++].trim().split(" ");
             arr[y-1][x-1] = MOVE_OBJ[d];
             marbles.push([y-1, x-1, MOVE_OBJ[d]])
-            cnt+=1;
         }
         for (let i = 0; i < 2 * n; i++)
             simulate();
