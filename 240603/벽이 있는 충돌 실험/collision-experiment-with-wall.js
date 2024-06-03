@@ -60,11 +60,7 @@ function move(arr,cnt) {
             }
         }
 
-        for(let i=0;i<N;i++) {
-            for(let j=0;j<N;j++) {
-                arr[i][j] = nextGrid[i][j];
-            }
-        }
+        arr = nextGrid
 
     }
     return cnt;
