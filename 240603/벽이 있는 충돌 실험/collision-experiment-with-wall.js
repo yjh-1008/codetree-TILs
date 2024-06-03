@@ -1,6 +1,7 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split("\n");
-let T = input.shift();
+let fsIdx= 0;
+let T = input[fsIdx++];
 //N*2의 시간동안 한번도 안부딛치면 게임 종료. 또는 공이 하나만 있어도 게임 종료.
 const MOVE_OBJ = {
     'U':0,
@@ -72,12 +73,12 @@ function move(arr,cnt) {
 function Solution() {
     let ret = '';
     while(T) {
-       const tmp = input.shift().trim().split(" ").map(Number); 
+       const tmp = input[fsIdx++].trim().split(" ").map(Number); 
        N = tmp[0], M = tmp[1];
        const arr = Array.from({length:N},( )=> new Array(N).fill(-1));
         let cnt = 0;
         for(let i=0;i<M;i++) {
-            const [y,x,d] = input.shift().trim().split(" ");
+            const [y,x,d] = input[fsIdx++].trim().split(" ");
             arr[y-1][x-1] = MOVE_OBJ[d];
             cnt+=1;
         }
