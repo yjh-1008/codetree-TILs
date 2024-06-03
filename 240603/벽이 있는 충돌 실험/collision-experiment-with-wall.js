@@ -39,7 +39,9 @@ function move(arr,cnt) {
                     let ny = i+dy[idx], nx = j+dx[idx];
                     if(!isRange(ny, nx)) {
                         idx = changeIdx(idx);
-                        ny = i+dy[idx], nx = j+dx[idx];
+                        nextGrid[i][j] = idx;
+                        continue;
+                        // ny = i+dy[idx], nx = j+dx[idx];
                     }
                     //해당 위치에 공이 있다면?
                     if(nextGrid[ny][nx] > -1) {
