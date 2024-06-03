@@ -25,12 +25,12 @@ function changeIdx(idx) {
     else return 2;
 }
 
-function move(arr,cnt) {
+function move(arr,cnt, clearArr) {
     let time = 0;
     while(true) {
         if(cnt === 1 || time === N *N) break;
         time += 1;
-        const nextGrid = Array.from({length:N},( )=> new Array(N).fill(-1));
+        const nextGrid = clearArr;
         // console.log(arr)
         for(let i=0;i<N;i++) {
             for(let j=0;j<N;j++) {
@@ -47,7 +47,6 @@ function move(arr,cnt) {
                             nextGrid[i][j] = idx;
                         }
                         continue;
-                        // ny = i+dy[idx], nx = j+dx[idx];
                     }
                     //해당 위치에 공이 있다면?
                     if(nextGrid[ny][nx] > -1) {
@@ -71,7 +70,8 @@ function Solution() {
     while(T) {
        const tmp = input[fsIdx++].trim().split(" ").map(Number); 
        N = tmp[0], M = tmp[1];
-       const arr = Array.from({length:N},( )=> new Array(N).fill(-1));
+       const arr = Array.from({length:N},()=> new Array(N).fill(-1));
+       const clearArr = Array.from({length:N},()=> new Array(N).fill(-1));
         let cnt = 0;
         for(let i=0;i<M;i++) {
             const [y,x,d] = input[fsIdx++].trim().split(" ");
@@ -79,7 +79,7 @@ function Solution() {
             cnt+=1;
         }
 
-        ret += move(arr,cnt) + '\n';
+        ret += move(arr,cnt, clearArr) + '\n';
         T--;
     }
     console.log(ret)
