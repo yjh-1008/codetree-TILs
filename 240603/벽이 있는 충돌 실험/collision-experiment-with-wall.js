@@ -28,7 +28,7 @@ function changeIdx(idx) {
 function move(arr,cnt) {
     let time = 0;
     while(true) {
-        if(cnt === 1 || time === N *N) break;
+        if(cnt === 1 || time === N *2) break;
         time += 1;
         const nextGrid = Array.from({length:N},( )=> new Array(N).fill(-1));
         // console.log(arr)
@@ -71,11 +71,12 @@ function Solution() {
        const tmp = input[fsIdx++].trim().split(" ").map(Number); 
        N = tmp[0], M = tmp[1];
        const arr = Array.from({length:N},()=> new Array(N).fill(-1));
-       const clearArr = Array.from({length:N},()=> new Array(N).fill(-1));
         let cnt = 0;
+        const marbles = [];
         for(let i=0;i<M;i++) {
             const [y,x,d] = input[fsIdx++].trim().split(" ");
             arr[y-1][x-1] = MOVE_OBJ[d];
+            // marbles.push([y-1, x])
             cnt+=1;
         }
 
