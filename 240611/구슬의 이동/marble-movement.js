@@ -32,22 +32,19 @@ function reverse(d) {
 function move(y, x, newGrid) {
     let [d, v, idx] = arr[y][x];
     v = Number(v)
-    let ny, nx;
+    let ny=y, nx=x
     for(let i=1;i<=v;i++) {
         let dir = MOVE_OBJ[d];
         let by = ny, bx = nx;
-        ny = my[dir]+y, nx = mx[dir]+x;
+        ny = my[dir]+ny, nx = mx[dir]+nx;
         if(!isRange(ny, nx)) {
             d = reverse(d);
             dir = MOVE_OBJ[d]
-            // console.log(dir);
             ny = my[dir]+by, nx = mx[dir]+bx;
         }
     }
-    // console.log(newGrid[ny][nx], ny, nx)
-    const tmp = [...newGrid[ny][nx]];
-    console.log(tmp)
-    newGrid[ny][nx] = [...tmp,[d, v, idx]];
+    // const tmp = [...newGrid[ny][nx],[d, v, idx]]
+    newGrid[ny][nx] = [...newGrid[ny][nx],[d, v, idx]];
 }
 
 function removeBalls(newGrid) {
@@ -72,18 +69,11 @@ function Solution() {
         const newGrid = Array.from({length:N}, () => new Array(N).fill([]));
         for(let i=0;i<N;i++) {
             for(let j=0;j<N;j++) {
-                newGrid[i][j] = arr[i][j];
-            }
-        }
-        for(let i=0;i<N;i++) {
-            for(let j=0;j<N;j++) {
                 if(arr[i][j].length) {
-                    // console.log(arr[i][j].length)
                     move(i,j, newGrid);
                 }
             }
         }
-        console.log(newGrid)
         removeBalls(newGrid);
 
         for(let i=0;i<N;i++) {
@@ -94,8 +84,13 @@ function Solution() {
         
         T--
     }
-    console.log('here')
-    console.log(arr)
+    let ret = 0;
+    for(let i=0;i<N;i++) {
+        for(let j=0;j<N;j++) {
+            if(arr[i][j].length) ret += arr[i][j].length
+        }
+    }
+    console.log(ret)
 }
 
 Solution();
