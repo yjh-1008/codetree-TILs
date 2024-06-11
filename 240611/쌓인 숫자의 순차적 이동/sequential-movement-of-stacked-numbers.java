@@ -78,8 +78,8 @@ public class Main {
         sb.append(gemCount);
 
         bw.write(sb.toString());
-        bw.close();
-        br.close();
+        // bw.close();
+        // br.close();
     }
 
     private static void simulate() {
