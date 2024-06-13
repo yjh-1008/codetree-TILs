@@ -16,7 +16,7 @@ function clearArray() {
 }
 
 function isRange(y, x) {
-    if(y< RANGE * -1 || y>RANGE || x< RANGE * -1 || x>RANGE) return false;
+    if(y<= RANGE * -1 || y>=RANGE || x<= RANGE * -1 || x>=RANGE) return false;
     return true;
 }
 
@@ -33,28 +33,28 @@ function compare(arr1, arr2) {
     return arr2;
 }
 
-
 function move(q, time) {
     let chk = false;
     let nq = [];
     q.forEach((item, idx) => {
-        let [r, c,w, d, i] = item;
+        const [r, c,w, d, i] = item;
         const moveIdx = MOVE_OBJ[d];
         const ny = r+dy[moveIdx], nx = c+dx[moveIdx];
-        // if(isRange(ny, nx)) {
+        if(isRange(ny, nx)) {
             const findIndex = nq.findIndex((item) => {
                 return item[0] === ny && item[1] === nx;
             })
-            // if(time >= 3999) console.log(r, c, ny, nx)
+            // console.log(nq, ny, nx)
             if(findIndex > -1) {
+                // console.log('here');
                 const bigger = compare(nq[findIndex], item);
                 nq = [...nq.slice(0, findIndex), ...nq.slice(findIndex+1)];
-                nq.push([ny, nx, bigger[2], bigger[3], bigger[4]]);
+                nq.push(bigger);
                 chk = true;
             } else {
-                nq.push([ny,nx,item[2], item[3],item[4]]);
+                nq.push(item);
             }
-        // } else {}
+        }
 
     })
     return [nq, chk];
@@ -69,27 +69,23 @@ function Solution() {
         for(let i=1;i<=N;i++) {
             let [r, c, w, d] = input[inIdx++].trim().split(" ");
             r = Number(r), c=Number(c), w=Number(w);
+            // const ay = Math.abs(RANGE+r)-1, ax = Math.abs(RANGE+c)-1;
             q.push([r, c,w, d, i]);
         }
         // console.log(q)
         let time = 0;
-        let crash = false;
-        while(time++ <= 4000) {
+        while(time++ < 4000) {
             // const nextGrid = clearArray();
             const [nq, chk] = move(q, time);
-            // console.log(chk)
-            // if(!nq.length) break;
+            // console.log(nq)
             if(chk) {
                 q= nq;
-                crash = true
             } else {
                 ret += time === 0 ? -1 : time*2;
                 ret+= '\n';
                 break;
             }
         }
-        // ret += crash  ? time*2 : -1;
-        // ret+= '\n';
         T--;
     }
     console.log(ret)
