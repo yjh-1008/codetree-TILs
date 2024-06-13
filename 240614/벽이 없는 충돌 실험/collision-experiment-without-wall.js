@@ -74,7 +74,7 @@ function Solution() {
         }
         // console.log(q)
         let time = 0;
-        while(time++ < 4000) {
+        while(time++ < 2000) {
             // const nextGrid = clearArray();
             const [nq, chk] = move(q, time);
             if(chk) {
