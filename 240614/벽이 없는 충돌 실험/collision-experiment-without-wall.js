@@ -77,13 +77,15 @@ function Solution() {
         while(time++ < 4000) {
             // const nextGrid = clearArray();
             const [nq, chk] = move(q, time);
-            // console.log(nq)
             if(chk) {
                 q= nq;
             } else {
-                ret += time === 0 ? -1 : time*2;
-                ret+= '\n';
-                break;
+                if(time < 4000 ){
+                    ret += time === 0 ? -1 : time*2;
+                    ret+= '\n';
+                    break;
+                }
+
             }
         }
         T--;
