@@ -9,14 +9,14 @@ const MOVE_OBJ = {
     'R':2,
     'L':3
 }
-const dy = [-1,1,0,0];
+const dy = [1,-1,0,0];
 const dx = [0,0,1, -1];
 function clearArray() {
     return Array.from({length:RANGE+1}, () => new Array(RANGE+1).fill(''));
 }
 
 function isRange(y, x) {
-    if(y<= RANGE * -1 || y>=RANGE || x<= RANGE * -1 || x>=RANGE) return false;
+    if(y< RANGE * -1 || y>RANGE || x< RANGE * -1 || x>RANGE) return false;
     return true;
 }
 
@@ -36,6 +36,7 @@ function compare(arr1, arr2) {
 function move(q, time) {
     let chk = false;
     let nq = [];
+    // console.log(time==)
     q.forEach((item, idx) => {
         const [r, c,w, d, i] = item;
         const moveIdx = MOVE_OBJ[d];
@@ -44,19 +45,21 @@ function move(q, time) {
             const findIndex = nq.findIndex((item) => {
                 return item[0] === ny && item[1] === nx;
             })
-            // console.log(nq, ny, nx)
+         
             if(findIndex > -1) {
-                // console.log('here');
                 const bigger = compare(nq[findIndex], item);
-                nq = [...nq.slice(0, findIndex), ...nq.slice(findIndex+1)];
-                nq.push(bigger);
+                // nq = [...nq.slice(0, findIndex), ...nq.slice(findIndex+1)];
+                nq.push([ny, nx, bigger[2], bigger[3], bigger[4]]);
                 chk = true;
             } else {
-                nq.push(item);
+                nq.push([ny, nx, item[2], item[3], item[4]]);
             }
+        } else {
+            nq.push([ny, nx, item[2], item[3], item[4]]);
         }
 
     })
+
     return [nq, chk];
 }
  
@@ -75,16 +78,14 @@ function Solution() {
         // console.log(q)
         let time = 0;
         let retTime = -1
-        while(time++ < 2000) {
+        while(time++ <= 5000) {
             // const nextGrid = clearArray();
             const [nq, chk] = move(q, time);
-            // console.log(nq.length)
+            q= nq;
+            //    if(time >= 1000)console.log(nq)
             if(chk) {
-                q= nq;
-            } else {
                 retTime = time;
-                break;
-            }
+            } 
         }
         ret += retTime*2 +'\n'
         T--;
