@@ -8,6 +8,7 @@ let [N,M,T] = input[0].trim().split(" ").map(Number);
 let arr = Array.from({length:N},() => Array.from({length:N},() => []));
 input.slice(1, input.lnegth).map((item, idx) => {
     const [r, c, d, w] = item.trim().split(" ");
+    console.log(r, c)
     arr[r-1][c-1].push([d, Number(w), idx+1]);
 })
 
