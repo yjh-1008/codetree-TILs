@@ -1,138 +1,123 @@
-const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split('\n');
+//방향을 바꾸는데도 1초가 소요.
+//충돌하면 번호는 큰걸로 변경, 무게는 합쳐짐.
+//큐를 써서 구슬을 넣어놓는다. 
+//큐를 빼면서 진행.
+const fs = require('fs');
+const input = fs.readFileSync(0).toString().trim().split("\n");
+let [N,M,T] = input[0].trim().split(" ").map(Number);
+let arr = Array.from({length:N},() => Array.from({length:N},() => []));
 
-const EMPTY = [0, 0, 0];
+// for (let i = 1; i <= m; i++) {
+//     let [r, c, d, w] = input[i].split(' ');
 
-const dirMapper = {
-    'U': 0,
-    'R': 1,
-    'L': 2,
-    'D': 3,
+//     [r, c, w] = [r, c, w].map(Number);
+//     d = dirMapper[d];
+
+//     grid[r - 1][c - 1] = [i, w, d];
+// }
+input.slice(1, input.lnegth).map((item, idx) => {
+    const [r, c, d, w] = item.split(" ");
+    // console.log(r, c)
+    arr[r-1][c-1].push([d, Number(w), idx+1]);
+})
+
+const MOVE_OBJ = {
+    'U':0,
+    'D':1, 
+    'R':2, 
+    'L':3
 }
 
-// 변수 선언 및 입력:
-const [n, m, t] = input[0].split(' ').map(Number);
-const grid = Array.from(Array(n + 1), () => Array(n + 1).fill(EMPTY));
-const nextGrid = Array.from(Array(n + 1), () => Array(n + 1).fill(EMPTY));
-
-function inRange(x, y) {
-    return 0 <= x && x < n && 0 <= y && y < n;
+function isRange(y, x) {
+    if(y < 0 || y>=N || x<0 || x>=N) return false;
+    return true;
 }
 
-function nextPos(x, y, moveDir) {
-    // 방향 전환을 쉽게 하기 위해 
-    // dx, dy 테크닉에서 0<->3, 1<->2가
-    // 서로 반대 방향이 되도록 정의합니다.
-    const dxs = [-1, 0, 0, 1];
-    const dys = [0, 1, -1, 0];
+function reverse(d) {
+    if(d === 'U') return 'D';
+    else if(d === 'D') return 'U';
+    else if(d=== 'R') return 'L';
+    else return 'R';
+}
 
-    let nx = x + dxs[moveDir];
-    let ny = y + dys[moveDir];
 
-    // 벽에 부딪히게 된다면, 방향만 전환해줍니다.
-    if (!inRange(nx, ny)) {
-        moveDir = 3 - moveDir;
-    } 
-    // 그렇지 않다면, 한 칸 전진합니다.
-    else {
-        x = nx;
-        y = ny;
+function move(r, c, grid) {
+    const my = [-1,1,0,0];
+    const mx = [0,0,1,-1];
+    let [d, w, idx] = arr[r][c][0];
+    // console.log(arr[r][c])
+    //현재 공의 위치 + 움직일 거리 >= N보다 크다면 범위를 벗어남.
+    //이동해야 할 총 거리는 현재나의 좌표 + Math.abs(N-움직일거리); 1은 멈춰있는 시간. 
+    let dir = MOVE_OBJ[d];
+    //w만큼 이동할거임
+    let tmpY = r, tmpX = c, ny=r, nx = c;
+    ny = my[dir]+tmpY, nx = mx[dir]+tmpX;
+        if(!isRange(ny, nx)) {
+            d = reverse(d);
+            // console.log(d)
+            dir = MOVE_OBJ[d];
+            ny = tmpY, nx = tmpX;
     }
-
-    return [x, y, moveDir];
+    // console.log(ny, nx)
+    grid[ny][nx].push([d, w, idx]);
+    // console.log(d, w, idx)
 }
 
-// (x, y) 위치에 새로운 구슬이 들어왔을 때 갱신을 진행합니다.
-function update(x, y, newMarble) {
-    // 기존 구슬 정보입니다.
-    let [num, weight, moveDir] = nextGrid[x][y];
-
-    // 새롭게 들어온 구슬 정보입니다.
-    let [newNum, newWeight, newDir] = newMarble;
-
-    // 새로 들어온 구슬이 더 우선순위가 높다면
-    // 번호와 방향은 새로운 구슬을 따르게 됩니다.
-    if (newNum > num)
-        nextGrid[x][y] = [newNum, weight + newWeight, newDir];
-    // 기존 구슬의 우선순위가 더 높다면
-    // 무게만 더해집니다.
-    else
-        nextGrid[x][y] = [num, weight + newWeight, moveDir];
-}
-
-function move(x, y) {
-    let [num, weight, moveDir] = grid[x][y];
-
-    // Step1. 현재 구슬의 다음 위치와 방향을 구합니다.
-    let [nx, ny, nextDir] = nextPos(x, y, moveDir);
-
-    // Step2. 구슬을 옮겨줍니다.
-    update(nx, ny, [num, weight, nextDir]);
-}
-
-function simulate() {
-    // Step1. nextGrid를 초기화합니다.
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            nextGrid[i][j] = EMPTY;
+function conver(tmp) {
+    let nw=0, nIdx=0, nd=''
+    tmp.forEach((item) => {
+        // console.log(item);
+        nw += item[1];
+        if(nIdx < item[2]) {
+            nIdx = item[2];
+            nd = item[0];
         }
-    }
+    })
+    //  console.log(nw)
+    return [nd, nw, nIdx];
+} 
 
-    // Step2. 각 구슬들을 한 칸씩 움직여줍니다.
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            if (grid[i][j] !== EMPTY) {
-                move(i, j);
+function add(nextGrid) {
+    for(let i=0;i<N;i++) {
+        for(let j=0;j<N;j++) {
+            //arr[i][j]가 빈 배열이 아니라면 공을 움직인다.
+            // console.log(nextGrid[i][j])
+            if(nextGrid[i][j].length > 1) {
+                const ret = conver(nextGrid[i][j]);
+                nextGrid[i][j] = [];
+                nextGrid[i][j].push(ret);
             }
         }
     }
-
-    // Step3. nextGrid 값을 grid로 옮겨줍니다.
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            grid[i][j] = nextGrid[i][j];
-        }
-    }
 }
 
-function getMarbleNum() {
-    let cnt = 0;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            if (grid[i][j] !== EMPTY) {
-                cnt += 1;
+function Solution() {
+    let ret = ``
+    while(T) {
+        const nextGrid =  Array.from({length:N},() => Array.from({length:N},() => []));
+        for(let i=0;i<N;i++) {
+            for(let j=0;j<N;j++) {
+                //arr[i][j]가 빈 배열이 아니라면 공을 움직인다.
+                if(arr[i][j].length) {
+                    move(i, j, nextGrid);
+                }
+            }
+        }
+        add(nextGrid);
+        arr = nextGrid;
+        T--
+    }
+    let cnt = 0, max= -1;
+    for(let i=0;i<N;i++) {
+        for(let j=0;j<N;j++) {
+            if(arr[i][j].length) {
+                // console.log(arr[i][j])
+                cnt +=1 ;
+                max = Math.max(max, arr[i][j][0][1]);
             }
         }
     }
-    return cnt;
+    console.log(cnt + ' '+max)
 }
 
-function getMaxWeight() {
-    let maxWeight = 0;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            if (grid[i][j] !== EMPTY) {
-                const [index, weight, direction] = grid[i][j];
-                maxWeight = Math.max(maxWeight, weight);
-            }
-        }
-    }
-    return maxWeight;
-}
-
-for (let i = 1; i <= m; i++) {
-    let [r, c, d, w] = input[i].split(' ');
-
-    [r, c, w] = [r, c, w].map(Number);
-    d = dirMapper[d];
-
-    grid[r - 1][c - 1] = [i, w, d];
-}
-
-// t초에 걸쳐 시뮬레이션을 진행합니다.
-for (let i = 1; i <= t; i++)
-    simulate();
-
-const marbleNum = getMarbleNum();
-const maxWeight = getMaxWeight();
-console.log(marbleNum, maxWeight);
+Solution();
