@@ -16,7 +16,7 @@ const draw = (arr, tmp) => {
 
 function chkMap(arr, n) {
     let tmp =n;
-    for(let i=0  ;i<M;i++) {
+    for(let i=0  ;i<16;i++) {
         //행을 통과하며 +1, -1 사이에 선이 있다면 그 방향으로 나아감.
         if(tmp + 1 < N && arr[i][tmp][tmp+1] === true) {
             tmp = tmp+1;
@@ -29,7 +29,7 @@ function chkMap(arr, n) {
 
 function go(tmp, cnt, firstRet) {
     if(cnt === M) {
-      const arr = Array.from({length:M}, () => Array.from({length:N}, () => Array(N)));
+      const arr = Array.from({length:16}, () => Array.from({length:11}, () => Array(11)));
       draw(arr,tmp);
         let chk = true, n;
         for(let i=0;i<N;i++) {
@@ -52,7 +52,7 @@ function go(tmp, cnt, firstRet) {
 }
 
 function first_draw() {
-   const arr = Array.from({length:M}, () => Array.from({length:N}, () => Array(N)));
+   const arr = Array.from({length:16}, () => Array.from({length:N}, () => Array(N)));
    draw(arr, lines)
    const firstRet = [];
    for(let i=0;i<N;i++) {
@@ -62,8 +62,9 @@ function first_draw() {
 }
 
 function Solution() {
-    const fistRet = first_draw();
-    go([], 0, fistRet)
+    const firstRet = first_draw();
+    go([], 0, firstRet)
+    // console.log(firstRet)
     console.log(ret);
 }
 
