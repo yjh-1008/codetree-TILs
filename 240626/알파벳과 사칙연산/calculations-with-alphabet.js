@@ -7,6 +7,16 @@ function isCalc(val) {
     return false;
 }
 let ret = 0;
+function module(a, mod, b) {
+    if(mod === '+') {
+        return a+b;
+    } else if(mod === '-') {
+        return a-b;
+    } else {
+        return a*b;
+    }
+}
+
 function clac(arr) {
     let mod = null, st = [];
     // console.log(arr)
@@ -15,8 +25,8 @@ function clac(arr) {
             mod = item;
         } else {
             if(st.length) {
-                let str = eval(`${st.pop()}${mod}${item}`);
-                st.push(str);
+                let val = module(st.pop(),mod, item);
+                st.push(val);
                 mod = null;
             } else {
                 st.push(item);
