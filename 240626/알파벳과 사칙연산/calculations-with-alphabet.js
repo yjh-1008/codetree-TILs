@@ -9,6 +9,7 @@ function isCalc(val) {
 let ret = 0;
 function clac(arr) {
     let mod = null, st = [];
+    // console.log(arr)
     arr.forEach((item) => {
         if(isCalc(item)) {
             mod = item;
@@ -23,24 +24,32 @@ function clac(arr) {
         }
     })
     ret = Math.max(st.pop(), ret);
-}   
+}     
+
+function fill(tmp, arr) {
+    input.forEach((item, idx) => {
+        if(isCalc(item)) {
+            tmp[idx] = item;
+        } else {
+            tmp[idx] = arr[item.charCodeAt()-97];
+        }
+    })
+}
 
 function go(cur, arr) {
-    if(cur === N) {
-        clac(arr);
+    if(cur === 6) {
+        let tmp = [];
+        fill(tmp, arr)
+        clac(tmp);
         return;
     }
-    for(let i=cur;i<N;i++) {
-        if(isCalc(input[cur])) go(cur+1, arr);
-        else {
-            for(let i=1;i<=4;i++){
-                let tmp = arr[cur];
-                arr[cur] = i;
-                go(cur+1, arr);
-                arr[cur] = tmp;
-            }
-        }
+
+    for(let i=1;i<=4;i++) {
+        arr[cur] = i;
+        go(cur+1, arr);
+        arr[cur] = 0
     }
+
 }
 
 function Solution() {
@@ -48,7 +57,7 @@ function Solution() {
     //대입이 끝나면 순서대로 연산.
     //연산인 경우에 cal을 변경 call이 Null이 아닌 경우에는 연산을 해야한다는 뜻.
     //배열에서 빼내고 연산 진행 후 결과값 넣음.
-    const arr = Array.from(input);
+    const arr = new Array(6).fill(0);
     go(0, arr);
     console.log(ret)
 }
