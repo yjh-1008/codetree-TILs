@@ -6,7 +6,7 @@ function isCalc(val) {
     if(val === '+' || val ==='-' || val ==='*') return true;
     return false;
 }
-let ret = Math.pow(2, 31)-1;
+let ret = -Math.pow(2, 31);
 function module(a, mod, b) {
     if(mod === '+') {
         return a+b;
