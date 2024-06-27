@@ -1,9 +1,13 @@
 const fs = require('fs');
 const [K,N] = fs.readFileSync(0).toString().trim().split(" ").map(Number);
 
+function chk(arr, i, cnt) {
+    // console.log(arr, i,cnt, arr[cnt-2] == i == arr[cnt-1])
+    return arr[cnt-2] == i && i == arr[cnt-1] && arr[cnt-1] == arr[cnt-2];
+}
+
 function go(cnt, arr) {
     if(cnt === N) {
-        // console.log(arr);
         console.log(arr.join(" "));
         return;
     }
@@ -14,10 +18,8 @@ function go(cnt, arr) {
             go(cnt+1, arr);
             arr.pop();
         }else {
-     
             arr.push(i);
-            // console.log
-            if(i === arr[cnt-1] === arr[cnt-2]) go(cnt+1, arr);
+            if(!chk(arr, i, cnt)) go(cnt+1, arr);
             arr.pop();
         }
     }
