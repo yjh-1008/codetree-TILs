@@ -3,7 +3,7 @@ const [K,N] = fs.readFileSync(0).toString().trim().split(" ").map(Number);
 
 function go(cnt, arr) {
     if(cnt === N) {
-        console.log(arr);
+        // console.log(arr);
         console.log(arr.join(" "));
         return;
     }
