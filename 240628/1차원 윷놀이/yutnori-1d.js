@@ -4,6 +4,7 @@ const [n,m,k] = input[0].split(" ").map(Number);
 const map = input[1].split(" ").map(Number);
 let ret = -1;
 function go(cnt, arr) {
+    // console.log(arr)
     if(cnt === n) {
         // console.log(arr);
         let cnt = 0
@@ -20,7 +21,7 @@ function go(cnt, arr) {
         // console.log(item)
             arr[index] += map[cnt];
             // console.log(arr)
-            if(arr[index] < m) {
+            if(arr[index] > m) {
                 arr[index] = m;
                 go(cnt+1, arr);
                 arr[index]+=map[cnt]
