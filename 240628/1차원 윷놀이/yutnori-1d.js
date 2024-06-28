@@ -25,8 +25,9 @@ function go(cnt, arr) {
                 arr[index] = m;
                 go(cnt+1, arr);
                 arr[index]+=map[cnt]
+                arr[index] -= map[cnt];
             }
-            arr[index] -= map[cnt];
+
             go(cnt+1, arr);
         }
     )
