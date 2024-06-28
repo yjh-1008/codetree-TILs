@@ -20,7 +20,7 @@ function go(cnt, arr) {
         // console.log(item)
             arr[index] += map[cnt];
             // console.log(arr)
-            if(arr[index] < m) go(cnt+1, arr);
+            go(cnt+1, arr);
             arr[index] -= map[cnt];
             go(cnt+1, arr);
         }
