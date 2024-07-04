@@ -17,8 +17,9 @@ function go(sy, sx, cnt) {
     const dir = move[sy][sx];
     const val = map[sy][sx];
     let y = sy, x = sx;
-    ret = Math.max(cnt);
+    ret = Math.max(cnt, ret);
     while(isRange(y, x, dir)) {
+        // console.log(y, x)
         y = y+my[dir], x=x+mx[dir];
         if(val < map[y][x]) {
             go(y, x, cnt+1);
