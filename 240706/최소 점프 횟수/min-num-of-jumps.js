@@ -9,14 +9,17 @@ function go(cur, cnt) {
         return;
     } else if(cur >  N)return;
 
-    go(cur+1, cnt+1);
-    go(cur + arr[cur], cnt+1);
+    for(let i=1;i<=arr[cur];i++) {
+        // console.log(cur, arr[cnt])
+        go(cur + i, cnt+1);
+    }
     return; 
 }
 
 function Solution() {
+    // console.log(arr);
     go(0, 0);
-    console.log(ret);
+    console.log(ret === Number.MAX_VALUE ? -1 : ret);
 }
 
 Solution();
