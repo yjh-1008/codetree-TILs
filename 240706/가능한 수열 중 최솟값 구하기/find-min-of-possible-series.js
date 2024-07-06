@@ -34,9 +34,12 @@ function go(arr) {
   
    nums.forEach((item) => {
     arr.push(item);
-    go(arr);
-    arr.pop();
+    if(avaliable(arr)) {
+         go(arr);
+        }
+        arr.pop();
    })
+   return;
 }
 
 function Solution() {
