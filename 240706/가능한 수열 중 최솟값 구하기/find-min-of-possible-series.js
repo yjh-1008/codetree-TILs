@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim();
 const N = Number(input);
 const nums = [4,5,6];
-let ret = [];
+let ret = Number.MAX_VALUE;
 
 function isSame(str1, str2) {
     for(let i=0;i<str1.length;i++) {
@@ -24,10 +24,10 @@ function avaliable(arr) {
 }
 
 function go(arr) {
-   if(arr.length === N) {
+   if(arr.length === N && ret < Number(arr.join(""))) {
         const chk = avaliable(arr);
         if(chk) {
-            ret.push(arr.join(""));
+            ret = Number(arr.join(""));
         }
         return;
    }
