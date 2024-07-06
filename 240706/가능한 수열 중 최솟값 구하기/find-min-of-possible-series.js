@@ -24,7 +24,7 @@ function avaliable(arr) {
 
 function go(arr) {
    if(arr.length === N) {
-        if(ret <= Number(arr.join(""))) {return;}
+        if(ret <= Number(arr.join(""))) return;
         const chk = avaliable(arr);
         if(chk) {
             ret = Number(arr.join(""));
