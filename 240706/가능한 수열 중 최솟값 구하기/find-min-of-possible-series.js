@@ -12,11 +12,11 @@ function isSame(str1, str2) {
 }
 
 function avaliable(arr) {
-    for(let t=1;t<N;t++) {
-        for(let i=0;i<=N-t-t;i++) {
-            const str1 = arr.slice(i, i+t);
-            const str2 = arr.slice(i+t, i+t+t);
-            if(isSame(str1, str2)) return false;
+    for (let i = 1; i <= Math.floor(arr.length / 2); i++) {
+        for (let j = 0; j < arr.length - i; j++) {
+            if (arr.slice(j, j + i).join('') === arr.slice(j + i, j + i + i).join('')) {
+                return false;
+            }
         }
     }
     return true;
