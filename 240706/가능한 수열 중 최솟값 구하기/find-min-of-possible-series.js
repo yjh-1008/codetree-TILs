@@ -24,7 +24,8 @@ function avaliable(arr) {
 }
 
 function go(arr) {
-   if(arr.length === N && ret < Number(arr.join(""))) {
+   if(arr.length === N) {
+        if(ret <= Number(arr.join(""))) {return;}
         const chk = avaliable(arr);
         if(chk) {
             ret = Number(arr.join(""));
@@ -44,7 +45,7 @@ function Solution() {
     // ret.sort((a,b) => {
     //     return Number(a) - Number(b);
     // })
-    console.log(ret[0])
+    console.log(ret)
 }
 
 Solution();
