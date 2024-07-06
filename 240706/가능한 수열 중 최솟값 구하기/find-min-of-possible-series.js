@@ -36,9 +36,9 @@ function go(arr) {
 
 function Solution() {
     go([]);
-    ret.sort((a,b) => {
-        return Number(a) - Number(b);
-    })
+    // ret.sort((a,b) => {
+    //     return Number(a) - Number(b);
+    // })
     console.log(ret[0])
 }
 
