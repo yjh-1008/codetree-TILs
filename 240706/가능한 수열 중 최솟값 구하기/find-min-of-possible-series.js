@@ -1,15 +1,20 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim();
-const n = Number(input);
+const N = Number(input);
 const nums = [4,5,6];
 let ret = Number.MAX_VALUE;
 
-let num = [];
+function isSame(str1, str2) {
+    for(let i=0;i<str1.length;i++) {
+        if(str1[i] !== str2[i]) return false;
+    }
+    return true;
+}
 
-function possible() {
-    for (let i = 1; i <= Math.floor(num.length / 2); i++) {
-        for (let j = 0; j < num.length - i; j++) {
-            if (num.slice(j, j + i).join('') === num.slice(j + i, j + i + i).join('')) {
+function avaliable(arr) {
+    for (let i = 1; i <= Math.floor(arr.length / 2); i++) {
+        for (let j = 0; j < arr.length - i; j++) {
+            if (arr.slice(j, j + i).join('') === arr.slice(j + i, j + i + i).join('')) {
                 return false;
             }
         }
@@ -17,26 +22,28 @@ function possible() {
     return true;
 }
 
-function find_min(cnt) {
-    if (cnt === n) {
-        let ans = '';
-        for (let j of num) {
-            ans += j;
+function go(arr) {
+   if(arr.length === N) {
+        console.log(arr.join(""))
+        process.exit(0);
+   }
+  
+   nums.forEach((item) => {
+    arr.push(item);
+    if(avaliable(arr)) {
+         go(arr);
         }
-        console.log(ans);
-        return;
-    }
-
-    for (let i = 4; i <= 6; i++) {
-        num.push(String(i));
-        if (possible()) {
-            find_min(cnt + 1);
-            if (num.length === n) {
-                return;
-            }
-        }
-        num.pop();
-    }
+        arr.pop();
+   })
+   return;
 }
 
-find_min(0);
+function Solution() {
+    go([]);
+    // ret.sort((a,b) => {
+    //     return Number(a) - Number(b);
+    // })
+    console.log(ret)
+}
+
+Solution();
