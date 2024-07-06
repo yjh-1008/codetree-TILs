@@ -13,7 +13,7 @@ function isSame(str1, str2) {
 
 function avaliable(arr) {
     for(let t=1;t<N;t++) {
-        for(let i=0;i<N-t;i++) {
+        for(let i=0;i<=N-t-t;i++) {
             const str1 = arr.slice(i, i+t);
             const str2 = arr.slice(i+t, i+t+t);
             if(isSame(str1, str2)) return false;
