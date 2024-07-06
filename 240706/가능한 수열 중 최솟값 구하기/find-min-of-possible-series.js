@@ -3,16 +3,21 @@ const input = fs.readFileSync(0).toString().trim();
 const N = Number(input);
 const nums = [4,5,6];
 let ret = [];
+
+function isSame(str1, str2) {
+    for(let i=0;i<str1.length;i++) {
+        if(str1[i] !== str2[i]) return false;
+    }
+    return true;
+}
+
 function avaliable(arr) {
     const n = arr.length
     for(let t=1;t<n;t++) {
         for(let i=0;i<n-t;i++) {
-
             const str1 = arr.slice(i, i+t);
             const str2 = arr.slice(i+t, i+t+t);
-
-            // console.log(str1, str2);
-            if(str1.join("") === str2.join("")) return false;
+            if(isSame(str1, str2)) return false;
         }
     }
     return true;
