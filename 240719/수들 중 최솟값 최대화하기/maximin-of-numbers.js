@@ -7,6 +7,7 @@ const visited = Array(N).fill(false);
 
 function go(r, tmp) {
     if(r === N) {
+        if(tmp.length !== N) return;
         // console.log(tmp)
         const max = tmp.sort((a, b) => a-b)[0];
         
