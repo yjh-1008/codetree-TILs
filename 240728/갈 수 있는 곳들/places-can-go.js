@@ -19,7 +19,7 @@ function moveable(nr, nc) {
 
 function Solution() {
     input.slice(1+N, input.length).map((item) => {
-        const [r, c] = item.split(" ").map(Number);
+        const [r, c] = item.split(" ").map((v) => v-1);
         if(visited[r][c] === false) {
             const q = [[r, c]];
             visited[r][c] = true;
