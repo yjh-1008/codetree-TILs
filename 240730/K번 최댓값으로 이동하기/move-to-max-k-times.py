@@ -37,7 +37,7 @@ def bfs(value):
 
     for i in range(n):
         for j in range(n):
-            if a[i][j] == max_val:
+            if visited[i][j] and a[i][j] == max_val:
                 max_pos.append((i, j))
 
 
