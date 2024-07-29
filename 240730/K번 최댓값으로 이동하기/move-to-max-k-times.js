@@ -45,6 +45,7 @@ function bfs(start) {
                         }
                     }
                 }
+                visited[nr][nc] = true;
                  q.push([nr, nc]);
             }       
         }
