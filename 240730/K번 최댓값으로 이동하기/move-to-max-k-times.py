@@ -1,66 +1,47 @@
 from collections import deque
+n, k = map(int,input().split())
+graph = [list(map(int,input().split())) for _ in range(n)]
+visited = [[0 for _ in range(n)] for _ in range(n)]
+q = deque([])
+dxs, dys = [1,0,-1,0], [0,1,0,-1]
+r, c = map(int,input().split())
+r, c = r - 1, c - 1
+key = 0
 
-# get input
-n, k = map(int, input().split())
-a = [list(map(int, input().split())) for _ in range(n)]
-r, c = map(int, input().split())
+def in_range(x,y):
+    return 0 <= x and x < n and 0 <= y and y < n
 
-def in_range(x, y):
-    return x >= 0 and x < n and y >= 0 and y < n
+def can_go(x,y):
+    return in_range(x,y) and visited[x][y] == 0 and graph[x][y] < key
 
-def can_go(x, y, value):
-    if not in_range(x, y):
-        return False
-    if a[x][y] >= value:
-        return False
-    if visited[x][y]:
-        return False
-    return True
-
-def bfs(value):
-    global q, visited
-    global max_val, max_pos
-
-    dxs = [-1, 1, 0, 0]
-    dys = [0, 0, -1, 1]
-
+def bfs():
+    global MAX
     while q:
         x, y = q.popleft()
+        for dx, dy in zip(dxs,dys):
+            ndx, ndy = x + dx, y + dy
+            if can_go(ndx, ndy):
+                q.append([ndx,ndy])
+                visited[ndx][ndy] = 1
+                MAX = max(MAX,graph[ndx][ndy])
 
-        for dx, dy in zip(dxs, dys):
-            nx = x + dx
-            ny = y + dy
-            if can_go(nx, ny, value):
-                visited[nx][ny] = True
-                q.append((nx, ny))
-                max_val = max(max_val, a[nx][ny]) # max_val 초기값이 0이므로 첫 탐색시 무조건 max pos에 입력되는 것을 방지
-
+check_break = True
+for _ in range(k):
+    MAX = 0
+    check = False
+    q.append([r,c])
+    key = graph[r][c]
+    bfs()
     for i in range(n):
         for j in range(n):
-            if visited[i][j] and a[i][j] == max_val:
-                max_pos.append((i, j))
-
-
-ans = (r - 1, c - 1)
-x, y = r - 1, c - 1
-
-for _ in range(k):
-    q = deque()
-
-    max_val = 0
-    max_pos = []
-    visited = [[False] * n for _ in range(n)]
-
-    visited[x][y] = True
-    q.append((x, y))
-    value = a[x][y]
-    # print(f'{_ + 1} init : \tx={x + 1} y={y + 1}, value={value}')
-    bfs(value)
-    if not max_pos:
+            if not check and graph[i][j] == MAX:
+                r, c = i, j
+                check = True
+    if not check:
+        print(r + 1,c + 1)
+        check_break = False
         break
-    max_pos.sort(key=lambda temp: (temp[0], temp[1])) # 정렬하여 우선순위 도출
-    print(f'max_val: {max_val} \t max_pos: {max_pos}')
-    x, y = max_pos[0]
-    ans = max_pos[0]
+    visited = [[0 for _ in range(n)] for _ in range(n)]
 
-print(ans[0] + 1, ans[1] + 1)
+if check_break:
+    print(r + 1,c + 1)
