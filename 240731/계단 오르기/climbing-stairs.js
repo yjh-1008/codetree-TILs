@@ -8,7 +8,7 @@ function go(cur) {
     if(cur === 0) return 1;
     else if(cur < 0 ) return 0;
     
-    if(arr[n] !== 0) return arr[n];
+    if(arr[cur] !== 0) return arr[cur];
     
     arr[n] = go(cur-2) + go(cur-3);
     return arr[n];
