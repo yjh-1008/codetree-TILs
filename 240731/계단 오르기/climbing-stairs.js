@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim();
 const n = +input;
 
-const arr = Array(6).fill(0);
+const arr = Array(1001).fill(0);
 
 function go(cur) {
     if(cur <= 0) return 0;
