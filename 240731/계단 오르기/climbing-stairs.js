@@ -7,7 +7,7 @@ const arr = Array(1001).fill(0);
 function go(cur) {
     if(cur <= 0) return 0;
     
-    if(arr[cur] !== 0) return arr[cur]+1;
+    if(arr[cur] !== 0) return arr[cur];
     
     arr[n] = go(cur-2) + go(cur-3);
     return arr[n];
