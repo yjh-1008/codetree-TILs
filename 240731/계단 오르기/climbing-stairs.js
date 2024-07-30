@@ -6,17 +6,17 @@ const arr = Array(6).fill(0);
 
 function go(cur) {
     if(cur <= 0) return 0;
+    // console.log(cur);
+    if(arr[cur] !== 0) return arr[cur];
     
-    if(arr[cur] !== 0) return arr[cur]+1;
-    
-    // arr[n] = 
+    // arr[cur] = 
     return go(cur-2) + go(cur-3);
 }
 
 function Solution() {
     for(let i=4;i<=n;i++) {
-        arr[n] = go(i);
-        console.log(arr)
+        arr[i] = go(i);
+        // console.log(arr)
     }
 }
 arr[2] = 1;
