@@ -12,9 +12,9 @@ function fibo(n) {
         return 1;
     }
 
-    arr[n] = fibo(n-1) + fibo(n-2);
+    else arr[n] = fibo(n-1) + fibo(n-2);
 
-    
+    return arr[n];
 }
 
 for(let i=1;i<=N;i++) {
