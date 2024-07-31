@@ -54,7 +54,7 @@ class MaxHeap {
          let currentIndex = this.heap.length-1;
          let parentIndex = Math.floor(currentIndex/2)
          while(parentIndex > 0 && value> this.heap[parentIndex]) {
-            console.log('here')
+            // console.log('here')
              let tmp = this.heap[parentIndex];
              this.heap[parentIndex] = this.heap[currentIndex];
              this.heap[currentIndex] = tmp
