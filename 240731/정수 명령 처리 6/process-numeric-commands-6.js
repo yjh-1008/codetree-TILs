@@ -132,7 +132,7 @@ class MinHeap extends Heap{
 
 
 
-        while(this.leftChild(index) !==undefined && (this.leftChild(index) < this.items[index] || this.rightChild(index) < this.items[index]){
+        while(this.leftChild(index) !==undefined && (this.leftChild(index) < this.items[index] || this.rightChild(index) < this.items[index])){
 
             let smallerIndex = this.leftChildIndex(index);
 
@@ -223,6 +223,6 @@ input.slice(1, input.length).map((item) => {
     } else if(cmd === 'empty') {
         console.log(pq.size() ? 0 : 1);
     } else if(cmd === 'top') {
-        console.log(pq.items[0])
+        console.log(pq.items)
     } 
 })
