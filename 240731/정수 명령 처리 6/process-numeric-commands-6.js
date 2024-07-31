@@ -65,7 +65,8 @@ class MaxHeap {
 
     heap_pop() {
         if(this.heap.length === 2) return this.heap.pop();
-        const ret = this.heap.pop();
+        const ret = this.heap[1];
+        this.heap[1] = this.heap.pop()
         let currentIndex = 1;
         let left = 2, right = 3;
           while(this.heap[currentIndex] < this.heap[left] || this.heap[currentIndex] < this.heap[right]) {
