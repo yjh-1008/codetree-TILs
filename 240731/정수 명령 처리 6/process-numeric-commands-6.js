@@ -51,7 +51,7 @@ class MaxHeap {
 
      heap_push(value) {
          this.heap.push(value);
-         let currentIndex = this.heap-1;
+         let currentIndex = this.heap.length-1;
          let parentIndex = Math.floor(currentIndex/2)
          while(parentIndex > 0 && value> this.heap[parentIndex]) {
              let tmp = this.heap[parentIndex];
