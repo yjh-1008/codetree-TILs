@@ -17,16 +17,16 @@ class MaxHeap {
         }
     }
 
-    pop(isTopPop) {
+    pop() {
         if (this.isEmpty()) return;
         if (this.heap.length === 2) return this.heap.pop();
-        if (!isTopPop) {
-            const parentIndex = Math.floor((this.heap.length - 1) / 2);
-            const lastLeaf = this.heap.slice(parentIndex);
-            const max = Math.min(...lastLeaf);
-            this._swap(parentIndex + lastLeaf.indexOf(max), this.heap.length - 1);
-            return this.heap.pop();
-        }
+        // if (!isTopPop) {
+        //     const parentIndex = Math.floor((this.heap.length - 1) / 2);
+        //     const lastLeaf = this.heap.slice(parentIndex);
+        //     const max = Math.min(...lastLeaf);
+        //     this._swap(parentIndex + lastLeaf.indexOf(max), this.heap.length - 1);
+        //     return this.heap.pop();
+        // }
 
         const val = this.heap[1];
         this.heap[1] = this.heap.pop();
@@ -88,6 +88,6 @@ input.slice(1, input.length).map((item) => {
     } else if(cmd === 'empty') {
         console.log(pq.isEmpty());
     } else if(cmd === 'top') {
-        console.log(Math.max(...pq.items))
+        console.log(pq.heap[1])
     } 
 })
