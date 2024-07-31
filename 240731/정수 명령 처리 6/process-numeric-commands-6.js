@@ -106,7 +106,7 @@ class PriorityQueue extends MaxHeap {
     }
 
     top() {
-        return this.heap[1];
+        return this.heap.at(-1);
     }
 }
 const pq = new PriorityQueue();
