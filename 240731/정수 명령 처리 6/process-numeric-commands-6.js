@@ -122,6 +122,6 @@ input.slice(1, input.length).map((item) => {
     } else if(cmd === 'empty') {
         console.log(pq.empty());
     } else if(cmd === 'top') {
-        conosle.log(pq.top())
+        console.log(pq.top())
     } 
 })
