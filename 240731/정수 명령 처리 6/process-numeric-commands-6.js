@@ -223,6 +223,6 @@ input.slice(1, input.length).map((item) => {
     } else if(cmd === 'empty') {
         console.log(pq.size() ? 0 : 1);
     } else if(cmd === 'top') {
-        console.log(pq.items)
+        console.log(pq.items[0])
     } 
 })
