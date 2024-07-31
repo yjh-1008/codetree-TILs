@@ -1,93 +1,83 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split("\n")
 class MaxHeap {
-    constructor() {
-        this.heap = [null];
+  constructor() {
+    this.heap = [];
+  }
+
+  parentIndex(i) {
+    return Math.floor((i - 1) / 2);
+  }
+
+  leftChildIndex(i) {
+    return 2 * i + 1;
+  }
+
+  rightChildIndex(i) {
+    return 2 * i + 2;
+  }
+
+  swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
+  insert(value) {
+    this.heap.push(value);
+    this.heapifyUp(this.heap.length - 1);
+  }
+
+  heapifyUp(i) {
+    while (i > 0 && this.heap[i] > this.heap[this.parentIndex(i)]) {
+      this.swap(i, this.parentIndex(i));
+      i = this.parentIndex(i);
     }
+  }
 
-    push(val) {
-        this.heap.push(val);
-        let currentIndex = this.heap.length - 1;
-        let parentIndex = Math.floor(currentIndex / 2);
+  pop() {
+    if (this.heap.length === 0) return null;
+    if(this.heap.length ===1) return this.heap.pop()
+    const max = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown(0);
+    return max;
+  }
 
-        while (parentIndex !== 0 && this.heap[currentIndex] > this.heap[parentIndex]) {
-            this._swap(currentIndex, parentIndex);
-            currentIndex = parentIndex;
-            parentIndex = Math.floor(currentIndex / 2);
-        }
+  heapifyDown(i) {
+    while (this.leftChildIndex(i) < this.heap.length) {
+      let largest = this.leftChildIndex(i);
+      if (
+        this.rightChildIndex(i) < this.heap.length &&
+        this.heap[this.rightChildIndex(i)] > this.heap[largest]
+      ) {
+        largest = this.rightChildIndex(i);
+      }
+      if (this.heap[i] >= this.heap[largest]) break;
+      this.swap(i, largest);
+      i = largest;
     }
+  }
 
-    pop() {
-        if (this.isEmpty()) return;
-        if (this.heap.length === 2) return this.heap.pop();
-        // if (!isTopPop) {
-        //     const parentIndex = Math.floor((this.heap.length - 1) / 2);
-        //     const lastLeaf = this.heap.slice(parentIndex);
-        //     const max = Math.min(...lastLeaf);
-        //     this._swap(parentIndex + lastLeaf.indexOf(max), this.heap.length - 1);
-        //     return this.heap.pop();
-        // }
+  peek() {
+    return this.heap[0] || null;
+  }
 
-        const val = this.heap[1];
-        this.heap[1] = this.heap.pop();
-
-        let currentIndex = 1;
-        let leftIndex = 2;
-        let rightIndex = 3;
-
-        while (
-            this.heap[leftIndex] && this.heap[currentIndex] < this.heap[leftIndex] ||
-            this.heap[rightIndex] && this.heap[currentIndex] < this.heap[rightIndex] 
-        ) {
-            if (this.heap[leftIndex] === undefined) {
-                this._swap(rightIndex, currentIndex);
-            } else if (this.heap[rightIndex] === undefined) {
-                this._swap(leftIndex, currentIndex);
-            } else if (this.heap[leftIndex] < this.heap[rightIndex]) {
-                this._swap(currentIndex, rightIndex);
-                currentIndex = rightIndex;
-            } else if (this.heap[leftIndex] >= this.heap[rightIndex]) {
-                this._swap(currentIndex, leftIndex);
-                currentIndex = leftIndex;
-            }
-
-            leftIndex = currentIndex * 2;
-            rightIndex = currentIndex * 2 + 1;
-        }
-
-        return val;
-    }
-
-    isEmpty() {
-        return this.heap.length === 1 ? 1 : 0;
-    }
-
-    result() {
-        if (this.heap.length === 1) return [0, 0];
-        if (this.heap.length === 2) return [this.heap[1] ,this.heap[1]];
-        const parentIndex = Math.floor((this.heap.length - 1) / 2);
-        const lastLeaf = this.heap.slice(parentIndex);
-        const max = Math.max(...lastLeaf);
-        return [max, this.heap[1]];
-    }
-
-    _swap(a, b) {
-        [this.heap[a], this.heap[b]] = [this.heap[b], this.heap[a]];
-    }
+  size() {
+    return this.heap.length;
+  }
 }
 const pq = new MaxHeap();
 input.slice(1, input.length).map((item) => {
     // console.log(pq.heap)
     const [cmd, num] = item.split(" ");
-    if(cmd === 'push') pq.push(num);
+    if(cmd === 'push') pq.insert(num);
     else if(cmd === 'size') {
-        console.log(pq.heap.length-1);
+        console.log(pq.size());
     } else if(cmd === 'pop') {
         // console.log('here');
         console.log(pq.pop());
     } else if(cmd === 'empty') {
-        console.log(pq.isEmpty());
+        console.log(pq.heap.length ? 0 : 1);
     } else if(cmd === 'top') {
-        console.log(pq.heap[1])
+        console.log(pq.peek())
     } 
 })
