@@ -70,7 +70,9 @@ class MaxHeap {
         let currentIndex = 1;
         let left = 2, right = 3;
           while(this.heap[currentIndex] < this.heap[left] || this.heap[currentIndex] < this.heap[right]) {
-             let index = this.heap[left] < this.heap[right] ? right: left
+            let index = this.heap[left] < this.heap[right] ? right: left
+            if(!this.heap[right]) index = left;
+      
              const tmp = this.heap[currentIndex];
              this.heap[currentIndex] = this.heap[index];
              this.heap[index] = tmp
