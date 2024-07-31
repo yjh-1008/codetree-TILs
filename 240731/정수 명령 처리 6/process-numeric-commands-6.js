@@ -200,7 +200,7 @@ class MaxHeap extends MinHeap{
     bubbleDown(){
         let index = 0;
         
-        while(this.leftChild(index)  !== undefined && (this.leftChild(index) > this.items[index] || this.rightChild(index) > this.items[index]){
+        while(this.leftChild(index)  !== undefined && (this.leftChild(index) > this.items[index] || this.rightChild(index) > this.items[index])){
             let largerIndex = this.leftChildIndex(index);
             if(this.rightChild(index)  !== undefined && this.rightChild(index) > this.items[largerIndex]){
                 largerIndex = this.rightChildIndex(index);
