@@ -106,7 +106,7 @@ class PriorityQueue extends MaxHeap {
     }
 
     top() {
-        return this.heap
+        return this.heap[1];
     }
 }
 const pq = new PriorityQueue();
@@ -121,5 +121,7 @@ input.slice(1, input.length).map((item) => {
         console.log(pq.pop());
     } else if(cmd === 'empty') {
         console.log(pq.empty());
-    }
+    } else if(cmd === 'top') {
+        conosle.log(pq.top())
+    } 
 })
