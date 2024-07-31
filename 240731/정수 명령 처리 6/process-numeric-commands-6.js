@@ -49,21 +49,18 @@ class MaxHeap {
         this.heap = [null];
     }
 
-    heap_push(val) {
-        this.heap.push(val);
-
-        let curIdx = this.heap.length-1;
-        let parentIdx = Math.floor(curIdx/2);
-
-        while(parentIdx !== 0 && val > this.heap[parentIdx]) {
-            const tmp = this.heap[curIdx];
-            this.heap[curIdx] = this.heap[parentIdx];
-            this.heap[parentIdx] = tmp;
-
-            curIdx = parentIdx;
-            parentIdx = Math.floor(curIdx/2);
-        }
-    }
+     heap_push(value) {
+         this.heap.push(value);
+         let currentIndex = this.heap-1;
+         let parentIndex = Math.floor(currentIndex/2)
+         while(parentIndex !== 0 && value> this.heap[parentIndex]) {
+             let tmp = this.heap[parentIndex];
+             this.heap[parentIndex] = this.heap[currentIndex];
+             this.heap[currentIndex] = tmp
+             currentIndex = parentIndex
+             parentIndex = Math.floor(currentIndex/2);
+         }
+     }
 
     heap_pop() {
         if(this.heap.length === 2) return this.heap.pop();
