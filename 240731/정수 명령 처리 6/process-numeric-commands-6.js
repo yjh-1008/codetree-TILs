@@ -55,7 +55,7 @@ class MaxHeap {
         let curIdx = this.heap.length-1;
         let parentIdx = Math.floor(curIdx/2);
 
-        while(parentIdx !== 0 && this.heap[curIdx] < this.heap[parentIdx]) {
+        while(parentIdx !== 0 && val > this.heap[parentIdx]) {
             const tmp = this.heap[curIdx];
             this.heap[curIdx] = this.heap[parentIdx];
             this.heap[parentIdx] = tmp;
@@ -106,7 +106,7 @@ class PriorityQueue extends MaxHeap {
     }
 
     top() {
-        return this.heap.at(-1);
+        return this.heap[1];
     }
 }
 const pq = new PriorityQueue();
