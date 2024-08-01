@@ -13,13 +13,13 @@ while(rt<N) {
         sum += arr[rt++];
     } else {
         sum -= arr[lt++];
-        ret = Math.min(rt-lt);
+        ret = Math.min(rt-lt+1);
     }
 }
 
 while(sum > S && lt < N) {
-        sum -= arr[lt++];
-        ret = Math.min(rt-lt);
+    sum -= arr[lt++];
+    ret = Math.min(rt-lt+1);
 }
 
 // for(let i=0;i<N;i++) {
