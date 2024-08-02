@@ -33,7 +33,7 @@ const go = (idx, cnt) => {
 
 function Solution() {
     go(0, 0);
-    console.log(ret === Math.MAX_VALUE ? -1 : ret);
+    console.log(ret === Number.MAX_VALUE ? -1 : ret);
 }
 
 Solution();
