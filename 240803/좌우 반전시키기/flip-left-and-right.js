@@ -11,6 +11,7 @@ const reverse = (n) => {
 
 const go = (idx, cnt) => {
     if(cnt >= ret) return;
+    if(cnt >1 && arr[0] === 0) return;
     if(idx === N) {
         // let chk = true;
         const idx = arr.findIndex((item) => item === 0);
@@ -28,9 +29,12 @@ const go = (idx, cnt) => {
     if(idx+1 < N) arr[idx+1] = reverse(arr[idx+1]);
 
     go(idx+1, cnt+1);
+
+
     // go(idx, cnt);
-    arr = tmp;
+    arr=tmp;
     go(idx+1, cnt);
+
     // go(idx, cnt)
 }
 
