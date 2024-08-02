@@ -27,18 +27,15 @@ const go = (idx, cnt) => {
     arr[idx] = reverse(arr[idx]);
     if(idx-1 >= 0) arr[idx-1] = reverse(arr[idx-1]);
     if(idx+1 < N) arr[idx+1] = reverse(arr[idx+1]);
-
+    if(idx > 1 && arr[idx-2] === 0) return;
     go(idx+1, cnt+1);
-
-
-    // go(idx, cnt);
     arr=tmp;
+    if(idx > 1 && arr[idx-2] === 0) return;
     go(idx+1, cnt);
-
-    // go(idx, cnt)
 }
 
 function Solution() {
+    // if(arr[0] === 0)
     go(1, 0);
     console.log(ret === Number.MAX_VALUE ? -1 : ret);
 }
