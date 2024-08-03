@@ -62,7 +62,7 @@ class MinHeap{
             let tmp = cur;
             if(left < this.heap.length && this.heap[cur] < this.heap[left]) {
                 tmp = left;
-            } else (right < this.heap.length && this.heap[cur] < this.heap[right]) {
+            } else{
                 tmp = right;
             }
 
