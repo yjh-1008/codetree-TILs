@@ -39,7 +39,7 @@ class MinHeap{
         this.heap.push([idx, val]);
         let cur = this.getCur(),parent = this.getParent();
 
-        while(parent > 0 && this.heap[cur] < this.heap[parent]) {
+        while(parent > 0 && this.heap[cur][1] < this.heap[parent][1]) {
             this.swap(cur, parent);
             cur = parent;
             parent = this.getParent(cur)
@@ -94,6 +94,7 @@ function Solution() {
             }
         })
     }
+
 
     d.forEach((item) => {
         const val = item === Infinity ? -1 : item;
