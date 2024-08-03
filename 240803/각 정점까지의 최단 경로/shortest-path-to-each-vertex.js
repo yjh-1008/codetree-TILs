@@ -55,7 +55,10 @@ class MinHeap{
         let cur = this.heap[1];
         let left = this.getLeft(cur), right = this.getParent(cur);
 
-        while(true) {
+        while(
+            this.heap[left] && this.heap[left] < this.heap[cur] ||
+            this.heap[right] && this.heap[right] < this.heap[cur]
+        ) {
             let tmp = cur;
             if(left < this.heap.length && this.heap[cur] < this.heap[left]) {
                 tmp = left;
