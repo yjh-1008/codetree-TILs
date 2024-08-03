@@ -84,9 +84,10 @@ function Solution() {
     q.push(start, 0);
     while(q.heap.length > 1) {
         const [cur, dist] = q.pop();
-        if(d[cur] < dist) continue;
+        if(d[cur] !==  dist) continue;
         graph[cur].forEach((value) => {
             const [v, weight] = value;
+            // if(dist < weight) continue;
             if(d[v] > weight + dist) {
                 d[v] = weight+dist;
                 q.push(v, weight+dist);
