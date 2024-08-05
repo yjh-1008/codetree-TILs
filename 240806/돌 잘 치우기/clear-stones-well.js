@@ -1,107 +1,119 @@
-const fs = require('fs')
-const input = fs.readFileSync(0).toString().trim().split("\n");
-const [n, k, m] = input[0].split(" ").map(Number);
-const arr = input.slice(1, n+1).map(item => item.split(" ").map(Number));
+const fs = require("fs");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+let input = fs.readFileSync(filePath).toString().trim().split("\n");
 
-// const [sr, sc] = input[input.length-2].split(" ").map(Number);
+const [n, k, m] = input.shift().split(" ").map(Number);
+const grid = input.slice(0, n).map((e) => e.split(" ").map(Number));
+const startPositions = input
+  .slice(n)
+  .map((e) => e.split(" ").map((num) => +num - 1));
 
+const [dx, dy] = [
+  [0, 1, 0, -1],
+  [1, 0, -1, 0],
+];
 
-class Queue {
-  constructor() {
-    this.items = [];
-    this.head = 0;
-    this.tail = 0;
-  }
+const q = [];
+let selectedStones = [];
+const stonePositions = [];
+let visited = Array.from({ length: n }, () =>
+  Array.from({ length: n }, () => false)
+);
+let answer = 0;
 
-  // 큐에 요소 추가
-  push(element) {
-    this.items[this.tail] = element;
-    this.tail++;
-  }
-
-  // 큐에서 요소 제거
-  pop() {
-    if (this.isEmpty()) {
-      return "Queue is empty";
-    }
-    const item = this.items[this.head];
-    this.head++;
-    return item;
-  }
-
-  // 큐의 맨 앞 요소 확인
-  peek() {
-    if (this.isEmpty()) {
-      return "Queue is empty";
-    }
-    return this.items[this.head];
-  }
-
-  // 큐가 비어 있는지 확인
-  isEmpty() {
-    return this.tail === this.head;
-  }
-
-  // 큐의 길이 확인
-  length() {
-    return this.tail - this.head;
-  }
-
-  // 큐를 초기화하거나 모든 요소를 제거
-  clear() {
-    this.items = [];
-    this.head = 0;
-    this.tail = 0;
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < n; j++) {
+    if (grid[i][j] === 1) stonePositions.push([i, j]);
   }
 }
 
-function fillVisited() {
-    const visited = Array.from({length:n}, () => Array(n).fill(false));
-    for(let i=0;i<n;i++) {
-        for(let j=0;j<n;j++) {
-            if(arr[i][j] === 1) visited[i][j] = true;
-        }
+function bfs() {
+  while (q.length) {
+    let [x, y] = q.shift();
+
+    for (let i = 0; i < 4; i++) {
+      let nx = x + dx[i];
+      let ny = y + dy[i];
+
+      if (
+        nx >= 0 &&
+        nx < n &&
+        ny >= 0 &&
+        ny < n &&
+        !grid[nx][ny] &&
+        !visited[nx][ny]
+      ) {
+        visited[nx][ny] = true;
+        q.push([nx, ny]);
+      }
     }
-    return visited;
+  }
 }
 
-const dr = [-1,1,0,0];
-const dc = [0,0,-1,1];
+function getVisitedNum() {
+  // 돌을 제거
+  for (let i = 0; i < m; i++) {
+    let [x, y] = selectedStones[i];
+    grid[x][y] = 0;
+  }
 
-function moveable(r, c) {
-    if(r<0 || r>=n ||c<0|| c>=n) return false;
-    return true;
-}
-let ret = Number.MIN_VALUE;
-function Solution() {
-    for(let i=input.length-2; i<input.length;i++) {
-        const [sr, sc] = input[i].split(" ").map((v) =>v-1);
-        const visited = fillVisited();
-        const q = new Queue();
-        visited[sr][sc] = true;
-        q.push([sr, sc, 0, 0]);
-        while(q.length()) {
-            // console.log(q.q)
-            const [r, c, s, cnt] = q.pop();
-            // console.log(r, c, cnt, i);
-            // if(s > )
-            for(let i=0;i<4;i++) {
-                const nr = dr[i]+r, nc = dc[i]+c;
-                if(!moveable(nr, nc) || visited[nr][nc]) continue;
-                if(cnt > n*n-1) break;
-                if(s >= k) {
-                    ret = Math.max(cnt, ret);
-                    // continue;
-                }
-                visited[nr][nc] = true;
-                q.push([nr, nc, s+1, cnt+1]);
-                      visited[nr][nc] = false;
-            }
-        }
+  //visited 초기화
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      visited[i][j] = false;
     }
-    console.log(ret)
-    // 어떤 돌을 치웠을때 가장 적절하게 치운걸까?
-    // go(0,0, cnt);
+  }
+
+  // 시작점 queue에 넣기
+  for (let i = 0; i < startPositions.length; i++) {
+    let [x, y] = startPositions[i];
+    q.push([x, y]);
+  }
+
+  // bfs로 탐색
+  bfs();
+
+  // 돌을 다시 표시
+  for (let i = 0; i < selectedStones.length; i++) {
+    let [x, y] = selectedStones[i];
+    grid[x][y] = 1;
+  }
+
+  // 도달한 칸의 수 세기
+  let cnt = 0;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (visited[i][j]) cnt += 1;
+    }
+  }
+
+  return cnt;
 }
 
-Solution();
+const selectedStonesIdx = [];
+const idxArr = Array.from({ length: m }, () => 0);
+
+function getSelectedStonesIdx(L, idx) {
+  if (L === m) {
+    selectedStonesIdx.push([...idxArr]);
+    return;
+  }
+
+  for (let i = idx; i < stonePositions.length; i++) {
+    idxArr[L] = i;
+    getSelectedStonesIdx(L + 1, i + 1);
+  }
+}
+
+
+getSelectedStonesIdx(0, 0);
+
+for (let i = 0; i < selectedStonesIdx.length; i++) {
+  for (let j = 0; j < selectedStonesIdx[i].length; j++) {
+    selectedStones.push(stonePositions[selectedStonesIdx[i][j]]);
+  }
+  answer = Math.max(answer, getVisitedNum());
+  selectedStones = [];
+}
+
+console.log(answer);
