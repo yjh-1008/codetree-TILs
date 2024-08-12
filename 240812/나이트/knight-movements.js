@@ -7,7 +7,6 @@ const moves = [
     [-2,-1],
     [-2,1],
     [-1,2],
-    [2,2],
     [1,2],
     [2,1],
     [2,-1],
@@ -45,7 +44,7 @@ const step = Array.from({length:N},() => Array(N).fill(Number.MAX_SAFE_INTEGER))
 
 
 function moveable(r, c) {
-    if(r < 0 || r>=N||c<0 || c>=N) return false;
+    if(r < 0 || r>=N || c<0 || c>=N) return false;
     return true;
 }
 
@@ -53,7 +52,7 @@ function Solution(){
     const q = new Queue();
     q.push([sr, sc]);
     // visited[sr][sc] = true;
-    step[sr][sc] = 1;
+    step[sr][sc] = 0;
 
     while(q.length()) {
         const [r, c] = q.pop();
