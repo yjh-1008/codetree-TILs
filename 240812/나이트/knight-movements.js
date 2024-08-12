@@ -68,7 +68,7 @@ function Solution(){
             }
         })
     }
-    console.log(step[er][ec] === Number.MAX_SAFE_INTEGER ? -1 : step[nr][nc]);
+    console.log(step[er][ec] === Number.MAX_SAFE_INTEGER ? -1 : step[er][ec]);
 }
 
 Solution();
