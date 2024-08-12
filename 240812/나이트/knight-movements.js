@@ -40,7 +40,7 @@ class Queue {
         return this.tail - this.head;
     }
 }
-const visited = Array.from({length:N},() => Array(N).fill(false));
+// const visited = Array.from({length:N},() => Array(N).fill(false));
 const step = Array.from({length:N},() => Array(N).fill(Number.MAX_SAFE_INTEGER));
 
 
@@ -52,8 +52,8 @@ function moveable(r, c) {
 function Solution(){
     const q = new Queue();
     q.push([sr, sc]);
-    visited[sr][sc] = true;
-    step[sr][sc] = 0;
+    // visited[sr][sc] = true;
+    step[sr][sc] = 1;
 
     while(q.length()) {
         const [r, c] = q.pop();
