@@ -64,7 +64,11 @@ function Solution() {
     const q = new Queue();
     for(let i=0;i<n;i++) {
         for(let j=0;j<n;j++) {
-            if(arr[i][j] === 3) q.push([i,j]); 
+            if(arr[i][j] === 3) {
+                q.push([i,j]); 
+                visited[i][j] = true;
+                step[i][j] = 0
+            }
         }
     }
 
