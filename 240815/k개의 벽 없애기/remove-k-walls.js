@@ -45,7 +45,7 @@ function bfs(visited) {
     q.push([sr, sc]);
     visited[sr][sc] = true;
     step[sr][sc] = 0;
-
+    // console.log(visited);
     while(q.length()) {
         const [r, c] = q.pop();
         for(let i=0;i<4;i++) {
@@ -57,7 +57,7 @@ function bfs(visited) {
             }
         }
     }
-    // console.log(visited);
+
     ret = Math.min(ret, step[er][ec]);
 }
 
@@ -69,8 +69,8 @@ function go(tmp, idx) {
         const visited = Array.from({length:N}, () => Array(N).fill(false));
         for(let i=0;i<N;i++) {
             for(let j=0;j<N;j++) {
-                // console.log(tmp, i,j)
-                const chk = tmp.includes([i, j])
+                const chk = tmp.find((item) => item[0] === i && item[1] === j);
+                // console.log(chk)
                 if(arr[i][j] === 1 && chk) visited[i][j] = false;
                 else if(arr[i][j] === 1 && !chk) visited[i][j] = true;
             }
