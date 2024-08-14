@@ -57,6 +57,7 @@ function bfs(visited) {
             }
         }
     }
+    // console.log(visited);
     ret = Math.min(ret, step[er][ec]);
 }
 
@@ -68,11 +69,14 @@ function go(tmp, idx) {
         const visited = Array.from({length:N}, () => Array(N).fill(false));
         for(let i=0;i<N;i++) {
             for(let j=0;j<N;j++) {
-                if(arr[i][j] === 1 && !tmp.includes([i, j])) visited[i][j] = false;
+                // console.log(tmp, i,j)
+                const chk = tmp.includes([i, j])
+                if(arr[i][j] === 1 && chk) visited[i][j] = false;
+                else if(arr[i][j] === 1 && !chk) visited[i][j] = true;
             }
         }
         bfs(visited);
-
+        
         return;
     }
 
@@ -88,8 +92,10 @@ function go(tmp, idx) {
 }
 
 function Solution() {
+    // console.log(arr);
     for(let i=0;i<N;i++) {
         for(let j=0;j<N;j++) {
+            // console.log(i,j, arr[i][j])
             if(arr[i][j] === 1) walls.push([i,j]);
         }
     }
