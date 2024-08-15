@@ -40,7 +40,7 @@ function Solution(){
         const cur = q.pop();
         // console.log(cur)
         if(cur === 1) continue;
-        if(moveable(cur-1) && step[cur-1] > step[cur]-1) {
+        if(moveable(cur-1) && step[cur-1] > step[cur]+1) {
             step[cur-1] = step[cur]+1
             q.push(cur-1)
         }
@@ -51,7 +51,7 @@ function Solution(){
         }
 
 
-        if(cur %2 === 0 &&step[cur/2] > step[cur+1]) {
+        if(cur %2 === 0 &&step[cur/2] > step[cur]+1) {
             step[cur/2] = step[cur]+1;
             q.push(cur/2)
         }
@@ -65,3 +65,6 @@ function Solution(){
 }
 
 Solution();
+
+
+// 286
