@@ -22,7 +22,7 @@ const MOD = 1000000007
 for(let i=3;i<=N;i++) {
     dp[i] = (dp[i-2] *3 + dp[i-1] * 2) % MOD;
     for(let j=i-3;j>=0;j--) {
-        dp[i] += (dp[j] * 2) % MOD
+        dp[i] = (dp[i]+(dp[j] * 2) )% MOD
     }
 }
 
