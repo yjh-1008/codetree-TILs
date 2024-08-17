@@ -17,11 +17,12 @@ const N = Number(input);
 const dp = Array(N+1).fill(0);
 dp[1] = 2;
 dp[2] = 7;
+const MOD = 1000000007
 for(let i=3;i<=N;i++) {
     if(i %2 === 0) {
-        dp[i] = (dp[i-1]*2) + dp[i-1] + dp[i-2] - 2;
+        dp[i] = ((dp[i-1]*2) + dp[i-1] + dp[i-2] - 2) % MOD;
     } else {
-        dp[i] = (dp[i-1]*2) + dp[i-1] + dp[i-2] - 1
+        (dp[i] = (dp[i-1]*2) + dp[i-1] + dp[i-2] - 1) % MOD
     }
 }
 
