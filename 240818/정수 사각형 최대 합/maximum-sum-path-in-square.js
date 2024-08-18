@@ -6,11 +6,7 @@ const arr = input.slice(1, input.length).map((item) => {
 })
 const dp = Array.from({length:N}, () => Array(N).fill(0));
 
-for(let i=0;i<N;i++) {
-    for(let j=0;j<N;j++) {
-        dp[i][j] = arr[i][j];
-    }
-}
+dp[0][0] = arr[0][0]
 
 const dr = [1,0];
 const dc = [0,1];
@@ -22,7 +18,7 @@ function moveable(r, c) {
 function go(r, c) {
     for(let i=0;i<2;i++) {
         const nr = dr[i] + r, nc = dc[i]+c;
-        if(moveable(nr, nc) &&dp[nr][nc] < dp[r][c] + arr[nr][nc]) {
+        if(moveable(nr, nc) && dp[nr][nc] < dp[r][c] + arr[nr][nc]) {
             dp[nr][nc] = dp[r][c] + arr[nr][nc]
             go(nr, nc)
         }
