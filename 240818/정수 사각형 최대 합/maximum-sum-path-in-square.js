@@ -22,8 +22,8 @@ function moveable(r, c) {
 function go(r, c) {
     for(let i=0;i<2;i++) {
         const nr = dr[i] + r, nc = dc[i]+c;
-        if(moveable(nr, nc)) {
-            dp[nr][nc] = Math.max(dp[nr][nc], dp[r][c] + arr[nr][nc]);
+        if(moveable(nr, nc) &&dp[nr][nc] < dp[r][c] + arr[nr][nc]) {
+            dp[nr][nc] = dp[r][c] + arr[nr][nc]
             go(nr, nc)
         }
     }
