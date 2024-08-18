@@ -32,8 +32,8 @@ function Solution() {
         for(let j=1;j<N;j++) {
             for(let t = 0;t<2;t++) {
                 const nr = dr[t] + i, nc = dc[t]+j;
-                if(movealbe(nr, nc) && dp[nr][nc] < dp[i][j]) {
-                    dp[i][j] = dp[nr][nc]
+                if(movealbe(nr, nc) ) {
+                    dp[i][j] = Math.min(arr[i][j], dp[nr][nc])
                 }
 
                 
