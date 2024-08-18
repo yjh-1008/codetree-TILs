@@ -4,7 +4,7 @@ const N = Number(input[0]);
 const arr = input.slice(1, input.length).map((item) => {
     return item.split(" ").map(Number);
 })
-const dp = Array.from({length:N}, () => Array(N).fill(0));
+const dp = Array.from({length:N}, () => Array(N).fill(Number.MAX_SAFE_INTEGER));
 //최소값들 중 최대값을 찾는 문제.
 //각 영역에서 갈 수 있는 길 중 최소값을 찾는다.
 //그 영역들 중 최대값을 찾는다.
@@ -26,18 +26,14 @@ function Solution() {
         return r >= 0 && r < N && c>=0 && c<N;
     }
 
-    const dr = [1,0];
-    const dc = [0,1];
+    const dr = [-1,0];
+    const dc = [0,-1];
     for(let i=1;i<N;i++) {
         for(let j=1;j<N;j++) {
             for(let t = 0;t<2;t++) {
                 const nr = dr[t] + i, nc = dc[t]+j;
-                if(movealbe(nr, nc)) {
-                    if(dp[nr][nc] < arr[nr][nc]) {
-                        dp[nr][nc] = arr[nr][nc]
-                    } else {
-                        dp[nr][nc] = dp[i][j];
-                    }
+                if(movealbe(nr, nc) && dp[nr][nc] < dp[i][j]) {
+                    dp[i][j] = dp[nr][nc]
                 }
 
                 
