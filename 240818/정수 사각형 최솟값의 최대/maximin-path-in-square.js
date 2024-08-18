@@ -30,7 +30,7 @@ function Solution() {
     const dc = [0,-1];
     for(let i=1;i<N;i++) {
         for(let j=1;j<N;j++) {
-            let tmp= Math.max(dp[i-1][j], dp[i-1][j-1]);
+            let tmp= Math.max(dp[i-1][j], dp[i][j-1]);
             dp[i][j] = Math.min(dp[i][j], tmp)
         }
     }
