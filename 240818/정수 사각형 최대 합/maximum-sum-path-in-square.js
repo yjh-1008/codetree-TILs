@@ -1,34 +1,35 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split("\n");
-const N = Number(input[0]);
-const arr = input.slice(1, input.length).map((item) => {
-    return item.split(" ").map(Number);
-})
-const dp = Array.from({length:N}, () => Array(N).fill(0));
 
-dp[0][0] = arr[0][0]
+const n = Number(input[0]);
+const num = input.slice(1).map(line => line.split(' ').map(Number));
 
-const dr = [1,0];
-const dc = [0,1];
+const dp = Array.from(Array(n), () => Array(n).fill(0));
 
-function moveable(r, c) {
-    return r >= 0 && r < N && c >= 0 && c<N;
-}
-
-function go(r, c) {
-    for(let i=0;i<2;i++) {
-        const nr = dr[i] + r, nc = dc[i]+c;
-        if(moveable(nr, nc) && dp[nr][nc] < dp[r][c] + arr[nr][nc]) {
-            dp[nr][nc] = dp[r][c] + arr[nr][nc]
-            go(nr, nc)
-        }
+function initialize() {
+    // 시작점의 경우 dp[0][0] = num[0][0]으로 초기값을 설정해줍니다
+    dp[0][0] = num[0][0];
+    
+    // 최좌측 열의 초기값을 설정해줍니다.
+    for (let i = 1; i < n; i++) {
+        dp[i][0] = dp[i - 1][0] + num[i][0];
+    }
+    
+    // 최상단 행의 초기값을 설정해줍니다.
+    for (let j = 1; j < n; j++) {
+        dp[0][j] = dp[0][j - 1] + num[0][j];
     }
 }
 
-function Solution() {
-    go(0,0);
+// 초기값 설정
+initialize();
 
-    console.log(dp[N-1][N-1])
-};
+// 탐색하는 위치의 위에 값과 좌측 값 중에 큰 값에
+// 해당 위치의 숫자를 더해줍니다. 
+for (let i = 1; i < n; i++) {
+    for (let j = 1; j < n; j++) {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + num[i][j];
+    }
+}
 
-Solution()
+console.log(dp[n - 1][n - 1]);
