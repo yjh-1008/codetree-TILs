@@ -9,10 +9,10 @@ const dp = Array.from({length:N}, () => Array(N).fill(Number.MAX_SAFE_INTEGER));
 //각 영역에서 갈 수 있는 길 중 최소값을 찾는다.
 //그 영역들 중 최대값을 찾는다.
 function Solution() {
-    dp[0][0] = arr[0][0]
-    // for(let i=0;i<N;i++) {
-    //     for(let j=0;j<N;j++) dp[i][j] = arr[i][j]
-    // }
+    // dp[0][0] = arr[0][0]
+    for(let i=0;i<N;i++) {
+        for(let j=0;j<N;j++) dp[i][j] = arr[i][j]
+    }
 
     for(let i=1;i<N;i++) {
         dp[i][0] = Math.min(dp[i-1][0], arr[i][0]);
@@ -30,14 +30,8 @@ function Solution() {
     const dc = [0,-1];
     for(let i=1;i<N;i++) {
         for(let j=1;j<N;j++) {
-            for(let t = 0;t<2;t++) {
-                const nr = dr[t] + i, nc = dc[t]+j;
-                if(movealbe(nr, nc) ) {
-                    dp[i][j] = Math.min(arr[i][j], dp[nr][nc])
-                }
-
-                
-            }
+            let tmp= Math.max(dp[i-1][j], dp[i-1][j-1]);
+            dp[i][j] = Math.min(dp[i][j], tmp)
         }
     }
 
