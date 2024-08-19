@@ -4,7 +4,7 @@ const N = Number(input[0]);
 const arr = input.slice(1, input.length).map((item) => {
     return item.split(" ").map(Number);
 })
-const dp = Array.from({length:N}, () => Array(N).fill(1));
+const dp = Array.from({length:N}, () => Array(N).fill(0));
 
 function moveable(r, c) {
     return r >= 0 && r < N && c>=0 && c<N;
@@ -31,7 +31,10 @@ function Solution() {
     //점화식 = Math.max(이전 발판의 카운트 + 1, 현재 발판의 값)
     for(let i=0;i<N;i++) {
         for(let j=0;j<N;j++) {
+            if(dp[i][j] === 0) {
+                dp[i][j] = 1;
                 go(i, j);
+            } else go(i,j)
         }
 
     }
@@ -42,7 +45,6 @@ function Solution() {
             if(max < dp[i][j]) max = dp[i][j]
         }
     }
-    // console.log(dp)
     console.log(max);
 }
 
