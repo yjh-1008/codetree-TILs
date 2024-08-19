@@ -4,25 +4,27 @@ const N = Number(input[0]);
 const arr = input.slice(1, input.length).map((item) => {
     return item.split(" ").map(Number);
 })
-const dp = Array.from({length:N}, () => Array(N).fill(1));
+const dp = Array.from({length:N}, () => Array(N).fill(-1));
 
 function moveable(r, c) {
     return r >= 0 && r < N && c>=0 && c<N;
 }
 
 function go(r, c) {
-    if(dp[r][c] > 1) {
+    if(dp[r][c] !== -1) {
         return dp[r][c];
     }
     const dr = [-1,1,0,0];
     const dc = [0,0,-1,1];
+    let cur = 1;
     for(let i=0;i<4;i++) {
         const nr = dr[i] +r, nc = dc[i] + c;
         if(moveable(nr, nc) && arr[r][c] < arr[nr][nc])  {
-            dp[r][c] = Math.max(dp[r][c], go(nr, nc) + 1)
+            cur = Math.max(cur, go(nr, nc) + 1)
             
         }
     }
+    dp[r][c] = cur
     return dp[r][c]
 }
 
