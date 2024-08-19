@@ -32,10 +32,7 @@ function Solution() {
     //점화식 = Math.max(이전 발판의 카운트 + 1, 현재 발판의 값)
     for(let i=0;i<N;i++) {
         for(let j=0;j<N;j++) {
-            if(dp[i][j] === 1) {
-                // dp[i][j] = 1;
-                go(i, j);
-            } else go(i,j)
+            go(i,j)
         }
 
     }
