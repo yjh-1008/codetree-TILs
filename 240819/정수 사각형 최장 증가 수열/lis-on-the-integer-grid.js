@@ -11,9 +11,9 @@ function moveable(r, c) {
 }
 
 function go(r, c) {
-    // if(dp[r][c] !== 0) {
-    //     return dp[r][c];
-    // }
+    if(dp[r][c] > 1) {
+        return dp[r][c];
+    }
     const dr = [-1,1,0,0];
     const dc = [0,0,-1,1];
     for(let i=0;i<4;i++) {
