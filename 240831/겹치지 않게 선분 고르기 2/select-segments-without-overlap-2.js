@@ -4,7 +4,7 @@ const N = Number(input[0]);
 const arr = input.slice(1, input.length).map((v) => {
     return v.split(" ").map(Number);
 });
-const dp = Array(1001).fill(-1);
+const dp = Array(1001).fill(1);
 
 // function go(idx) {
 //     const [r, c] = arr[idx];
