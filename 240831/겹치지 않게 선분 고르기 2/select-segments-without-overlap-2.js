@@ -6,12 +6,6 @@ const arr = input.slice(1, input.length).map((v) => {
 });
 const dp = Array(1001).fill(1);
 
-// function go(idx) {
-//     const [r, c] = arr[idx];
-
-//     for(let j=)
-// }
-
 function Solution() {
     arr.sort((a,b) => {
         if(a[0] === b[0]) return a[1] - b[1];
@@ -22,7 +16,7 @@ function Solution() {
 
     for(let i=1;i<N;i++) {
         for(let j=0;j<i;j++) {
-            if(arr[j][1] <= arr[i][0]) {
+            if(arr[j][1] < arr[i][0]) {
                 if(dp[i] < dp[j]+1) {
                     dp[i] = dp[j]+1;
                 }
