@@ -13,14 +13,17 @@ function Solution() {
 
     // 1은 증가하는중, 2는 감소하는중
 
-    for(let i=1;i<N;i++) {
+    for(let i=1;i<=N;i++) {
         for(let j=0;j<i;j++) {
             //증가하는 부분.
             if(arr[i] > arr[j]) {
                 //감소하는 상태였다면 증가 불가.
-                if(dp[j][1] === 2) continue;
-                if(dp[i][0] < dp[j][0] +1 ) {
-                    dp[i] = [dp[j][0] +1, 1];
+                if(dp[j][1] === 2) {
+                    dp[i] = [2, 1];
+                } else {
+                    if(dp[i][0] < dp[j][0] +1 ) {
+                        dp[i] = [dp[j][0] +1, 1];
+                    } 
                 }
             } else if(arr[i] < arr[j]) { //감소 상태.
                 if(dp[i][0] < dp[j][0] +1 ) {
@@ -28,8 +31,9 @@ function Solution() {
                 }
             }
         }
+        // console.log(dp.slice(0, N+1)+"\n");
     }
-    // console.log(dp.map((item) => item[0]));
+
     console.log(Math.max(...dp.map((item) => item[0])))
 }
 
