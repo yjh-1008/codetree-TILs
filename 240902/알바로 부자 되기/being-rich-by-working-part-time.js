@@ -13,7 +13,6 @@ const Solution = () => {
     dp[i] = arr[i][2];
  }
  const isCross = (cs, ce, ps, pe) => {
-    // console.log(ce, ps)
     return pe >= cs;
  }
 
@@ -21,13 +20,17 @@ const Solution = () => {
     const [cs, ce, cp] = arr[i];
     for(let j=0;j<i;j++) {
         const [ps, pe, pp] = arr[j];
+
         if(isCross(cs, ce, ps, pe)) {
-            // console.log(dp[i], dp[j]);
-            dp[i] = Math.max(dp[i], dp[j]);
+            if(cp > pp) continue;
+            else {
+                dp[i] = dp[j] + pp-cp;
+            }
         } else {
-            // console.log('here');
-            if(dp[i] < dp[j]+cp) dp[i] = dp[j] + cp;
-            
+            if(i===3) console.log('here', dp[j]+cp, dp[i])
+            if(dp[i] < dp[j]+cp) {
+                dp[i] = dp[j] + cp;
+            }
         }
     }
  }
