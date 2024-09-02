@@ -13,7 +13,7 @@ const Solution = () => {
     dp[i] = arr[i][2];
  }
  const isCross = (cs, ce, ps, pe) => {
-    console.log(pe, cs)
+    // console.log(pe, cs)
     return pe >= cs;
  }
 
@@ -24,10 +24,9 @@ const Solution = () => {
         if(isCross(cs, ce, ps, pe)) {
             //겹쳐있다면, 겹친 값 중에서 더 큰 값을 선택한다
             let max = Math.min(pp, cp);
-            if(dp[i] < max) dp[i] = max
+            if(dp[i] < cp) dp[i] = max
         } else {
             if(dp[i] < dp[j]+cp) {
-                // console.log(dp[j], isCross(cs, ce, ps, pe), pe,cs)
                 dp[i] = dp[j] + cp;
             }
         }
