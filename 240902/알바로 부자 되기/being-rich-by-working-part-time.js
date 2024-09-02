@@ -27,7 +27,7 @@ const Solution = () => {
                 dp[i] = dp[j] + pp-cp;
             }
         } else {
-            if(i===3) console.log('here', dp[j]+cp, dp[i])
+            // if(i===3) console.log('here', dp[j]+cp, dp[i])
             if(dp[i] < dp[j]+cp) {
                 dp[i] = dp[j] + cp;
             }
