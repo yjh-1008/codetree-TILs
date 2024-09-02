@@ -24,7 +24,7 @@ const Solution = () => {
         if(isCross(cs, ce, ps, pe)) {
             //겹쳐있다면, 겹친 값 중에서 더 큰 값을 선택한다
             let max = Math.min(pp, cp);
-            if(dp[i] < cp) dp[i] = max
+            if(dp[i] < cp) dp[i] = cp
         } else {
             if(dp[i] < dp[j]+cp) {
                 dp[i] = dp[j] + cp;
