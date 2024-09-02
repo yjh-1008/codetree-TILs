@@ -26,7 +26,8 @@ const Solution = () => {
             dp[i] = Math.max(dp[i], dp[j]);
         } else {
             // console.log('here');
-            dp[i] = dp[j] + cp;
+            if(dp[i] < dp[j]+cp) dp[i] = dp[j] + cp;
+            
         }
     }
  }
