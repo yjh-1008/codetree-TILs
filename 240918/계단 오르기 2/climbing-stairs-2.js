@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split("\n");
 const N = +input[0];
 const arr = [0,...input[1].split(" ").map(Number)];
-const dp = Array.from({length:N+1} ,() => new Array(4).fill(-1));
+const dp = Array.from({length:N+1} ,() => new Array(4).fill(0));
 const Solution = () => {
  //요소 1계단을 얼만큼 사용했는가?
  //계단을 얼만큼 올랐는가
