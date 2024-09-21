@@ -18,20 +18,25 @@ const Solution = () => {
     for(let i=0;i<N;i++) {
         for(let j=0;j<N;j++) {
             if(dp[i][j] == -1) continue;
-                if(i<N && p1[i + 1] < p2[j + 1]){
-                    dp[i+1][j] = Math.max(dp[i][j], dp[i+1][j]);
-                }
-                if(j<N&& p1[i + 1] > p2[j + 1]){
-                    dp[i][j+1] = Math.max(dp[i][j] + p2[j + 1], dp[i][j+1]);
-                }
-                dp[i+1][j+1] = Math.max(dp[i][j], dp[i+1][j+1]);
+            if(p1[i + 1] < p2[j + 1]){
+                dp[i+1][j] = Math.max(dp[i][j], dp[i+1][j]);
+            }
+            if(p1[i + 1] > p2[j + 1]){
+                dp[i][j+1] = Math.max(dp[i][j] + p2[j + 1], dp[i][j+1]);
+            }
+            dp[i+1][j+1] = Math.max(dp[i][j], dp[i+1][j+1]);
 
             // dp[i][j] = Math.max(dp[i-1][j-1], dp[i][j])
         }
         // console.log(dp[i]);
     }
-    // console.log(dp[N])
-    console.log(Math.max(...dp[N-2]))
+    let ans = 0;
+    for (let i = 0; i <= N; i++) {
+        ans = Math.max(ans, dp[i][N]);
+        ans = Math.max(ans, dp[N][i]);
+    }
+    
+    console.log(ans);
 }
 
 Solution();
