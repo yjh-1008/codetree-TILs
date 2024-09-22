@@ -11,12 +11,11 @@ const solution = () => {
     const isRange = (num) => {
         return num >= 0 && num < 41;
     }
-    dp[0][arr[0]+ 20] = 1;
-    dp[0][-1*arr[0] + 20] = 1;
+    dp[0][arr[0]+ 20] += 1;
+    dp[0][-1*arr[0] + 20] += 1;
     for(let i=1;i<=N;i++) {
         for(let j=0;j<41;j++) {
             if(dp[i-1][j] === -1) continue;
-            // console.log(j-arr[i]);
             if(isRange(j-arr[i])) {
                 dp[i][j-arr[i]] += dp[i-1][j];
             }
