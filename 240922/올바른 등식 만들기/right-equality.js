@@ -6,7 +6,7 @@ const dp = Array.from({length:N+1} , () => Array(41).fill(0));
 
 //더하거나 뺀다
 const solution = () => {
-    // dp[0][0] = 0;
+    dp[0][20] = 1;
     //i-1번째에 더하거나 뺀 수에 더하거나 뺏을때 M인가?
     const isRange = (num) => {
         return num >= 0 && num < 41;
