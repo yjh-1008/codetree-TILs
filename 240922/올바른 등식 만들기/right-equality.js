@@ -2,7 +2,7 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split("\n");
 const [N,M] = input[0].split(" ").map(Number);
 const arr = input[1].split(" ").map(Number);
-const dp = Array.from({length:N+1} , () => Array(41).fill(0));
+const dp = Array.from({length:N+1} , () => Array(41).fill(0n));
 
 //더하거나 뺀다
 const solution = () => {
@@ -11,8 +11,8 @@ const solution = () => {
     const isRange = (num) => {
         return num >= 0 && num < 41;
     }
-    dp[0][arr[0]+ 20] += 1;
-    dp[0][-1*arr[0] + 20] += 1;
+    dp[0][arr[0]+ 20] = 1n;
+    dp[0][-1*arr[0] + 20] = 1n;
     for(let i=1;i<=N;i++) {
         for(let j=0;j<41;j++) {
             if(dp[i-1][j] === -1) continue;
