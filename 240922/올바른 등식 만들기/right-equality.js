@@ -6,7 +6,7 @@ const dp = Array.from({length:N+1} , () => Array(41).fill(0));
 
 //더하거나 뺀다
 const solution = () => {
-    dp[0][20] = 1;
+    // dp[0][20] = 1;
     //i-1번째에 더하거나 뺀 수에 더하거나 뺏을때 M인가?
     const isRange = (num) => {
         return num >= 0 && num < 41;
@@ -16,11 +16,12 @@ const solution = () => {
     for(let i=1;i<=N;i++) {
         for(let j=0;j<41;j++) {
             if(dp[i-1][j] === -1) continue;
+            
             if(isRange(j-arr[i])) {
-                dp[i][j-arr[i]] += dp[i-1][j];
+                dp[i][j] += dp[i-1][j-arr[i]];
             }
             if(isRange(j+arr[i])) {
-                dp[i][j+arr[i]] += dp[i-1][j];
+                dp[i][j] += dp[i-1][j+arr[i]];
             }
         }
     }
