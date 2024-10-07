@@ -11,13 +11,13 @@ const Solution = () => {
             for(let k=0;k<3;k++) {
                 if(!dp[i][j][k]) continue;
 
-                dp[i+1][j][0] = dp[i+1][j][0] + (dp[i][j][k] % DIV);
+                dp[i+1][j][0] = (dp[i+1][j][0] + dp[i][j][k]) % DIV;
 
                 if(j<2) {
-                    dp[i+1][j+1][0] = dp[i+1][j+1][0] + (dp[i][j][k] % DIV);
+                    dp[i+1][j+1][0] = (dp[i+1][j+1][0] + dp[i][j][k] )% DIV;
                 }
                 if(k<2) {
-                    dp[i+1][j][k+1] = dp[i+1][j][k+1] + (dp[i][j][k] % DIV);
+                    dp[i+1][j][k+1] = (dp[i+1][j][k+1] + dp[i][j][k] )% DIV;
                 }
             }
         }
