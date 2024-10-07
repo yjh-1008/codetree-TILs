@@ -26,7 +26,7 @@ const Solution = () => {
     for(let j=0;j<3;j++) {
         for(let k=0;k<3;k++) {
             // console.log(dp[2])
-            answer += dp[N][j][k];
+            answer = (answer + dp[N][j][k]) % DIV;
         }
     }
     console.log(answer)
