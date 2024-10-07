@@ -1,6 +1,6 @@
 const fs = require('fs');
 const N = +fs.readFileSync(0).toString();
-const DIV = Math.pow(10, 9) + 7;
+const DIV = 1000000007
 const dp = Array.from(Array(1005), () => Array.from(Array(3), () => Array(3).fill(0)));
 const Solution = () => {
     //dp: N일까지 살아남을 수 있는 경우의 수.
