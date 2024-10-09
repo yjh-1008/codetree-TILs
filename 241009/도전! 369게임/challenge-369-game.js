@@ -8,9 +8,14 @@ const Solution = () => {
             // console.log(i)
             answer++;
         }
-        else if(i.toString().includes('3') || i.toString().includes('6')|| i.toString().includes('9')) {
-            //  console.log(i)
-            answer++
+        else {
+            for(const n of i.toString()) {
+                if(n == 3 || n == 6 || n ==9) {
+                    answer++;
+                    break;
+                }
+            }
+            // answer++
         }
     }
 
