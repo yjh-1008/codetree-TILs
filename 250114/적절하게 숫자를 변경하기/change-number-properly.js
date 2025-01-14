@@ -8,7 +8,7 @@ const input = fs.readFileSync('/dev/stdin').toString().trim().split("\n");
 
 const [N, M] = input[0].split(" ").map(Number);
 const nums = input[1].split(" ").map(Number);
-const dp = Array.from({length: N+1}, () => Array.from({length:5}, ()=> new Array(M+1).fill(Number.MIN_SAFE_INTEGER)));
+const dp = Array.from({length: N+1}, () => Array.from({length:5}, ()=> new Array(M+1).fill(0)));
 
 function Solution() {
     //초기 유사도
@@ -18,15 +18,16 @@ function Solution() {
         for(let j=1;j<=4;j++) {
             for(let q=1;q<=4;q++) {
                 for(let k=0;k<=M;k++) {
-          
+                      //비슷한 수열인지 확인
                     dp[i][j][k] = Math.max(dp[i][j][k], dp[i-1][j][k])
-                    //비슷한 수열인지 확인
-                    if(j == nums[i] && dp[i-1][j][k] != Number.MIN_SAFE_INTEGER) {
+                    if(j == nums[i]) {
                         //유사도 검사
-                        dp[i][j][k] = Math.max(dp[i][j][k], dp[i-1][j][k]+1);
+                        if(j == q) {
+                            dp[i][j][k] = Math.max(dp[i][j][k], dp[i-1][j][k]+1);
+                        } 
                     } else {
                         if(k > 0) {
-                            if(dp[i-1][q][k-1] != Number.MIN_SAFE_INTEGER) {
+                            if(dp[i-1][q][k-1] != 0) {
                                 dp[i][nums[i]][k] = Math.max(dp[i][nums[i]][k], dp[i-1][q][k-1]+1)
                             }
                         }
