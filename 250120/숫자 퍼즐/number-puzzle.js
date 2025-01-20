@@ -24,7 +24,6 @@ function Solution() {
             for(let k=0;k<dp[i][j].length;k++) {
                 const tmp = dp[i][j][k];
                 const sum = tmp.reduce((pev, cur) => cur += pev, 0);
-                // console.log(sum, dp[i][j])
                 for(let q=tmp.at(-1);q<=M;q++) {
                     if(sum+q > M) continue;
                     if(i == N-2 && sum + q != M) continue;
@@ -32,6 +31,7 @@ function Solution() {
                     dp[i+1][sum+q].push([...tmp, q]);
                 }
             }
+            dp[i][j] = []
         }
     }
     // console.log(dp[N-1])
