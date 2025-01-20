@@ -1,51 +1,44 @@
-//n개의 마법석
-//이전 마법석의 숫자보다 크거나 같아야함
-//모든 숫자의 합은 m
-// 규칙을 따른 수열 중 k번째 수열
-//n번째 에서 I를 골랐을때 올 수 있는 
+const fs = require("fs");
+const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const fs = require('fs');
-const input = fs.readFileSync(0).toString().trim()
+// n, m, k 값을 입력받습니다.
+let [n, m, k] = input[0].split(' ').map(Number);
 
-const [N, M,K] = input.split(" ").map(Number);
+// 초기 상태를 설정합니다.
+let dp = Array.from(Array(15), () => 
+    Array.from(Array(205), () => 
+        Array(205).fill(0)));    
 
-const dp = Array.from({length:N}, () => {
-    return Array.from({length:M+1}).fill([])
-})
-
-
-function Solution() {
-    for(let i=1;i<=M;i++) {
-        dp[0][i].push([i]);
-    }
-
-    for(let i=0;i<N-1;i++) {
-        for(let j=1;j<=M;j++) {
-            for(let k=0;k<dp[i][j].length;k++) {
-                const tmp = dp[i][j][k];
-                const sum = tmp.reduce((pev, cur) => cur += pev, 0);
-                for(let q=tmp.at(-1);q<=M;q++) {
-                    if(sum+q > M) continue;
-                    if(i == N-2 && sum + q != M) continue;
-                    // console.log(sum+q)
-                    dp[i+1][sum+q].push([...tmp, q]);
-                }
-            }
-            dp[i][j] = []
-        }
-    }
-    // console.log(dp[N-1])
-    let cnt = 0;
-    for(let i=0;i<=M;i++) {
-        for(let j=0;j<dp[N-1][i].length;j++) {
-            if(cnt+1 == K) {
-                console.log(dp[N-1][i][j].join(" "));
-                return;
-            }
-            cnt++
-        }
-    }
-    // console.log(4/2)
+for (let i = 1; i <= m; i++) {
+    dp[1][i][i] = 1;
 }
 
-Solution();
+// 동적 프로그래밍을 사용하여 각 상태를 계산합니다.
+// dp[i][j][k] :: i개의 마법석을 사용하고, 숫자의 합이 j이며, 이중 가장 마지막의 숫자가 k인 가짓수
+for (let i = 1; i < n; i++) {
+    for (let j = 1; j <= m; j++) {
+        for (let k = 1; k <= m; k++) {
+            for (let l = 1; l <= k; l++) {
+                if (j + l > m) break;
+                dp[i + 1][j + l][l] += dp[i][j][k];
+                dp[i + 1][j + l][l] = Math.min(dp[i + 1][j + l][l], 10**9);
+            }
+        }
+    }
+}
+
+// 최종 결과를 계산하고 출력합니다.
+let ans = '';
+let curL = 1;
+let curM = m;
+for (let i = n; i >= 1; i--) {
+    while (dp[i][curM][curL] < k) {
+        k -= dp[i][curM][curL];
+        curL++;
+    }
+
+    ans += `${curL} `;
+    curM -= curL;
+}
+
+console.log(ans);
