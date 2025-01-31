@@ -31,9 +31,11 @@ function Solution() {
         }
     }
 
-    let ans = Number.MAX_SAFE_INTEGER;
-    for (let i = 1; i <= n; i++)
-    ans = Math.max(ans, dp[m][i]);
+    let ans = Number.MIN_SAFE_INTEGER;
+    for (let i = 0; i < N; i++){
+        // console.log(ans, dp[M][i])
+        ans = Math.max(ans, dp[M][i]);
+    }
 
     console.log(ans);
     
