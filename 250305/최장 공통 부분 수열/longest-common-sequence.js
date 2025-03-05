@@ -3,8 +3,8 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 
 const str1 = input[0];
 const str2 = input[1];
-const dp = Array.from({length:str1.length+1}, () => {
-    return Array(str2.length+1).fill(0);
+const dp = Array.from({length:str1.length}, () => {
+    return Array(str2.length).fill(0);
 })
 // Please write your code here.
 function Solution() {
